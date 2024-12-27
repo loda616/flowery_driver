@@ -25,6 +25,11 @@ static TextStyle font11PinkWeight400 = TextStyle(
     color: AppColors.kPink,
     fontWeight: FontWeight.w400,
   );
+static TextStyle font11GreyWeight400 = TextStyle(
+    fontSize: 11.sp,
+    color: AppColors.kGray,
+    fontWeight: FontWeight.w400,
+  );
 
   static TextStyle font20GreyWeight500 = TextStyle(
     fontSize: 20.sp,
