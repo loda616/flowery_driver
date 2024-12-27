@@ -1,7 +1,5 @@
 import 'package:flowery_driver/core/styles/colors/app_colors.dart';
 import 'package:flowery_driver/core/styles/fonts/app_fonts.dart';
-import 'package:flowery_driver/presentation/my_profile/widget/logout_row.dart';
-import 'package:flowery_driver/presentation/my_profile/widget/person_info_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/utils/widget/custom_switch_title.dart';
 import '../../../generated/l10n.dart';
 import '../widget/language_row.dart';
+import '../widget/logout_row.dart';
+import '../widget/person_info_card.dart';
 import '../widget/vehicle_info_card.dart';
 
 class MyProfileScreen extends StatefulWidget {

@@ -177,7 +177,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "profileUpdatedSuccessfully":
             MessageLookupByLibrary.simpleMessage("تم تحديث الملف الشخصي بنجاح"),
         "readyForDelivery":
-            MessageLookupByLibrary.simpleMessage("جاهزة للتسليم "),
+            MessageLookupByLibrary.simpleMessage("جاهز للتسليم "),
         "rememberMeText": MessageLookupByLibrary.simpleMessage("تذكرني"),
         "resendCodeSuccessState": MessageLookupByLibrary.simpleMessage(
             "يرجى التحقق من بريدك الإلكتروني، تم إعادة إرسال الرمز بنجاح."),
