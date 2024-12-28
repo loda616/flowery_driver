@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
 import '../../../../core/base/base_view_model.dart';
-import '../../../../data/model/auth/requests/sign_up_request_model.dart';
+import '../../../../data/model/auth/requests/apply_request_model.dart';
 import '../../../../domain/entity/vehicles/vehicle_type_entity.dart';
 import '../../../../domain/use_case/auth/apply_use_case.dart';
 import '../../../../domain/use_case/vehicles/get_all_vehicles_use_case.dart';
@@ -38,7 +38,7 @@ class ApplyViewModel extends BaseViewModel<SignUpState> {
     }
   }
 
-  void signUp(SignUpRequestBodyModel signUpData) async {
+  void apply(ApplyRequestBodyModel signUpData) async {
     emit(SignUpLoading());
     final response = await _signUpUseCase.invoke(signUpData);
 

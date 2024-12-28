@@ -60,7 +60,7 @@ class _AuthApiManager implements AuthApiManager {
 
   @override
   Future<SignUpResponseModel> apply(
-      SignUpRequestBodyModel signUpRequestBody) async {
+      ApplyRequestBodyModel signUpRequestBody) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

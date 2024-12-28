@@ -3,9 +3,9 @@ import 'package:injectable/injectable.dart';
 import '../../../../core/api/api_result.dart';
 import '../../../../core/api/execute_api_call.dart';
 import '../../../api/auth_api/auth_api_manager.dart';
+import '../../../model/auth/requests/apply_request_model.dart';
 import '../../../model/auth/requests/login_request_model.dart';
 import '../../../model/auth/requests/reset_password_request_model.dart';
-import '../../../model/auth/requests/sign_up_request_model.dart';
 import '../../../model/auth/response/login_response_model.dart';
 import 'auth_remote_data_source.dart';
 
@@ -25,7 +25,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<Result<String?>> apply(SignUpRequestBodyModel signUpRequestBody) {
+  Future<Result<String?>> apply(ApplyRequestBodyModel signUpRequestBody) {
     return executeApiCall<String?>(() async {
       final response = await apiManger.apply(signUpRequestBody);
       return response.message;

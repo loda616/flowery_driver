@@ -8,7 +8,7 @@ import '../../../../core/utils/functions/validators/validators.dart';
 import '../../../../core/utils/widget/country_picker.dart';
 import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../core/utils/widget/custom_text_form_field.dart';
-import '../../../../data/model/auth/requests/sign_up_request_model.dart';
+import '../../../../data/model/auth/requests/apply_request_model.dart';
 import '../../../../generated/l10n.dart';
 import '../view_model/apply_view_model.dart';
 
@@ -21,61 +21,24 @@ class ApplyScreen extends StatefulWidget {
 }
 
 class _ApplyScreenState extends State<ApplyScreen> {
+  late final ApplyViewModel cubit;
   final _formKey = GlobalKey<FormState>();
-  late final TextEditingController _countryController;
-  late final TextEditingController _firstNameController;
-  late final TextEditingController _lastNameController;
-  String vehicleTypeId = '';
+  late ApplyRequestBodyModel applyRequestBodyModel;
 
-  late final TextEditingController _emailController;
-  late final TextEditingController _passwordController;
-  late final TextEditingController _confirmPasswordController;
-  late final TextEditingController _phoneNumberController;
-  late String _gender;
+  String _gender = '';
 
   @override
   void initState() {
     super.initState();
-    _countryController = TextEditingController();
-    _firstNameController = TextEditingController();
-    _lastNameController = TextEditingController();
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
-    _confirmPasswordController = TextEditingController();
-    _phoneNumberController = TextEditingController();
-    _gender = '';
-  }
-
-  @override
-  void dispose() {
-    _firstNameController.dispose();
-    _lastNameController.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
-    _phoneNumberController.dispose();
-    super.dispose();
-  }
-
-  void signUp() async {
-    if (_formKey.currentState!.validate()) {
-      context.read<ApplyViewModel>().signUp(
-            SignUpRequestBodyModel(
-              firstName: _firstNameController.text,
-              lastName: _lastNameController.text,
-              email: _emailController.text,
-              password: _passwordController.text,
-              rePassword: _confirmPasswordController.text,
-              phone: _phoneNumberController.text,
-              gender: _gender.toLowerCase(),
-            ),
-          );
-    }
+    cubit = context.read<ApplyViewModel>();
+    cubit.getAllVehiclesType();
+    applyRequestBodyModel = ApplyRequestBodyModel();
   }
 
   @override
   Widget build(BuildContext context) {
     final local = S.of(context);
+
     return BlocListener<ApplyViewModel, SignUpState>(
       bloc: context.read<ApplyViewModel>(),
       listener: (context, state) => _handelStateChange(state),
@@ -114,15 +77,19 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   ),
                   24.verticalSpace,
                   CountryInputField(
-                    controller: _countryController,
+                    onInputChanged: (value) {
+                      applyRequestBodyModel.country = value;
+                    },
                   ),
                   24.verticalSpace,
                   CustomTextFormField(
-                    hintText: local.firstLegalHintName,
                     labelText: local.firstLegalName,
+                    hintText: local.firstLegalHintName,
                     validator: (value) => Validators.validateName(value),
                     keyBordType: TextInputType.text,
-                    controller: _firstNameController,
+                    onChanged: (value) {
+                      applyRequestBodyModel.firstName = value;
+                    },
                   ),
                   24.verticalSpace,
                   CustomTextFormField(
@@ -130,11 +97,16 @@ class _ApplyScreenState extends State<ApplyScreen> {
                     labelText: local.secondLegalName,
                     validator: (value) => Validators.validateName(value),
                     keyBordType: TextInputType.text,
-                    controller: _firstNameController,
+                    onChanged: (value) {
+                      applyRequestBodyModel.lastName = value;
+                    },
                   ),
                   24.verticalSpace,
+                  // TODO: replace with vehicle type
                   CountryInputField(
-                    controller: _countryController,
+                    onInputChanged: (value) {
+                      applyRequestBodyModel.vehicleTypeId = value;
+                    },
                   ),
                   24.verticalSpace,
                   CustomTextFormField(
@@ -142,15 +114,16 @@ class _ApplyScreenState extends State<ApplyScreen> {
                     labelText: local.vehicle_number,
                     validator: (value) => Validators.validateName(value),
                     keyBordType: TextInputType.text,
-                    controller: _firstNameController,
+                    onChanged: (value) {
+                      applyRequestBodyModel.vehicleNumber = value;
+                    },
                   ),
                   24.verticalSpace,
                   CustomTextFormField(
                     hintText: local.vehicle_licence_hint,
                     labelText: local.vehicle_licence,
                     validator: (value) => Validators.validateName(value),
-                    keyBordType: TextInputType.text,
-                    controller: _firstNameController,
+                    readOnly: true,
                     suffixIcon: GestureDetector(
                       onTap: () {},
                       child: const Icon(Icons.file_upload_outlined),
@@ -162,7 +135,9 @@ class _ApplyScreenState extends State<ApplyScreen> {
                     labelText: local.emailLabelText,
                     validator: (value) => Validators.validateEmail(value),
                     keyBordType: TextInputType.text,
-                    controller: _emailController,
+                    onChanged: (value) {
+                      applyRequestBodyModel.email = value;
+                    },
                   ),
                   24.verticalSpace,
                   CustomTextFormField(
@@ -171,11 +146,12 @@ class _ApplyScreenState extends State<ApplyScreen> {
                     validator: (value) => Validators.validatePhoneNumber(value),
                     keyBordType: TextInputType.phone,
                     textInputAction: TextInputAction.done,
-                    controller: _phoneNumberController,
                     onChanged: (value) {
                       if (value.trim().isEmpty) {
                         final prefix = '+2';
-                        _phoneNumberController.text = prefix;
+                        applyRequestBodyModel.phone = prefix;
+                      } else {
+                        applyRequestBodyModel.phone = value;
                       }
                     },
                   ),
@@ -185,7 +161,9 @@ class _ApplyScreenState extends State<ApplyScreen> {
                     labelText: local.id_number,
                     validator: (value) => Validators.validateName(value),
                     keyBordType: TextInputType.text,
-                    controller: _firstNameController,
+                    onChanged: (value) {
+                      applyRequestBodyModel.nationalId = value;
+                    },
                   ),
                   24.verticalSpace,
                   CustomTextFormField(
@@ -193,7 +171,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                     labelText: local.id_image,
                     validator: (value) => Validators.validateName(value),
                     keyBordType: TextInputType.text,
-                    controller: _firstNameController,
+                    readOnly: true,
                     suffixIcon: GestureDetector(
                       onTap: () {},
                       child: const Icon(Icons.file_upload_outlined),
@@ -210,7 +188,9 @@ class _ApplyScreenState extends State<ApplyScreen> {
                           validator: (value) =>
                               Validators.validatePassword(value),
                           keyBordType: TextInputType.text,
-                          controller: _passwordController,
+                          onChanged: (value) {
+                            applyRequestBodyModel.password = value;
+                          },
                         ),
                       ),
                       16.horizontalSpace,
@@ -221,11 +201,13 @@ class _ApplyScreenState extends State<ApplyScreen> {
                           isPassword: true,
                           validator: (value) =>
                               Validators.validatePasswordConfirmation(
-                            password: _passwordController.text,
+                            password: applyRequestBodyModel.password,
                             confirmPassword: value,
                           ),
                           keyBordType: TextInputType.text,
-                          controller: _confirmPasswordController,
+                          onChanged: (value) {
+                            applyRequestBodyModel.rePassword = value;
+                          },
                         ),
                       ),
                     ],
@@ -278,7 +260,11 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   ),
                   24.verticalSpace,
                   CustomButton(
-                    onPressed: signUp,
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        cubit.apply(applyRequestBodyModel);
+                      }
+                    },
                     text: local.continueText,
                   ),
                   16.verticalSpace,

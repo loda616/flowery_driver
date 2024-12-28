@@ -37,38 +37,40 @@ class _CountryInputFieldState extends State<CountryInputField> {
 
   void _openCountryPickerDialog() {
     showDialog(
-        context: context,
-        builder: (context) {
-          final locale = S.of(context);
-          return Theme(
-            data: Theme.of(context),
-            child: CountryPickerDialog(
-              title: Text(locale.country),
-              titlePadding: EdgeInsets.all(4.0.r),
-              searchCursorColor: Theme.of(context).primaryColor,
-              searchInputDecoration:
-                  InputDecoration(hintText: '${locale.search}...'),
-              isSearchable: true,
-              onValuePicked: (Country country) {
-                if (kDebugMode) {
-                  log(country.isoCode, name: 'isoCode');
-                  log(country.iso3Code, name: 'iso3Code');
-                  log(country.phoneCode, name: 'phoneCode');
-                  log(country.name, name: 'name');
-                }
-                widget.onSelectCode?.call(country.phoneCode);
-                setState(() => _selectedCountry = country);
-                widget.controller?.text = country.name;
-              },
-              priorityList: [
-                CountryPickerUtils.getCountryByIsoCode('EG'),
-              ],
-              itemBuilder: (country) {
-                return _buildDialogItem(country, false);
-              },
-            ),
-          );
-        });
+      context: context,
+      builder: (context) {
+        final locale = S.of(context);
+        return Theme(
+          data: Theme.of(context),
+          child: CountryPickerDialog(
+            title: Text(locale.country),
+            titlePadding: EdgeInsets.all(4.0.r),
+            searchCursorColor: Theme.of(context).primaryColor,
+            searchInputDecoration:
+                InputDecoration(hintText: '${locale.search}...'),
+            isSearchable: true,
+            onValuePicked: (Country country) {
+              if (kDebugMode) {
+                log(country.isoCode, name: 'isoCode');
+                log(country.iso3Code, name: 'iso3Code');
+                log(country.phoneCode, name: 'phoneCode');
+                log(country.name, name: 'name');
+              }
+              widget.onSelectCode?.call(country.phoneCode);
+              widget.onInputChanged?.call(country.name);
+              setState(() => _selectedCountry = country);
+              widget.controller?.text = country.name;
+            },
+            priorityList: [
+              CountryPickerUtils.getCountryByIsoCode('EG'),
+            ],
+            itemBuilder: (country) {
+              return _buildDialogItem(country, false);
+            },
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildDialogItem(Country country, bool isSelected) {
@@ -80,7 +82,9 @@ class _CountryInputFieldState extends State<CountryInputField> {
           child: CountryPickerUtils.getDefaultFlagImage(country),
         ),
         isSelected ? 4.horizontalSpace : 8.horizontalSpace,
-        Flexible(child: Text(country.name)),
+        Flexible(
+          child: Text(country.name),
+        ),
       ],
     );
   }
@@ -90,7 +94,6 @@ class _CountryInputFieldState extends State<CountryInputField> {
     final locale = S.of(context);
 
     return CustomTextFormField(
-      controller: widget.controller,
       hintText: locale.country,
       labelText: locale.country,
       validator: Validators.validatePhoneNumber,

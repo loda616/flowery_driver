@@ -3,9 +3,9 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../core/api/api_const.dart';
+import '../../model/auth/requests/apply_request_model.dart';
 import '../../model/auth/requests/login_request_model.dart';
 import '../../model/auth/requests/reset_password_request_model.dart';
-import '../../model/auth/requests/sign_up_request_model.dart';
 import '../../model/auth/response/login_response_model.dart';
 import '../../model/auth/response/sign_up_response_model.dart';
 
@@ -23,7 +23,7 @@ abstract class AuthApiManager {
 
   @POST(ApiConstants.apply)
   Future<SignUpResponseModel> apply(
-    @Body() SignUpRequestBodyModel signUpRequestBody,
+    @Body() ApplyRequestBodyModel signUpRequestBody,
   );
 
   @POST(ApiConstants.forgotPassword)
