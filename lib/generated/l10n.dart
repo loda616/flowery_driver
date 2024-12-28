@@ -1389,6 +1389,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Welcome to\nFlowery rider app`
+  String get onboardingMessage {
+    return Intl.message(
+      'Welcome to\nFlowery rider app',
+      name: 'onboardingMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply Now`
+  String get applyNow {
+    return Intl.message(
+      'Apply Now',
+      name: 'applyNow',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

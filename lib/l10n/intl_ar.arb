@@ -40,7 +40,7 @@
   "emptyUserName": "يرجى إدخال اسم المستخدم",
   "english": "الإنجليزية",
   "enterPassword": "أدخل كلمة المرور",
-  "errorLoadingProductDetails": "خطأ في تحميل تفاصيل المنتج"  ,
+  "errorLoadingProductDetails": "خطأ في تحميل تفاصيل المنتج",
   "exploreText": "استكشف",
   "female": "أنثى",
   "firstNameHintText": "أدخل الاسم الأول",
@@ -132,6 +132,7 @@
   "locationError": "خطأ في تحديد الموقع",
   "searchError": "حدث خطأ أثناء البحث",
   "searchForProducts": "ابحث عن المنتجات",
-  "readyForDelivery": "جاهز للتسليم "
-
+  "readyForDelivery": "جاهز للتسليم ",
+  "onboardingMessage": "مرحبًا بك في\nتطبيق توصيل فلوري",
+  "applyNow": "قدم الآن"
 }

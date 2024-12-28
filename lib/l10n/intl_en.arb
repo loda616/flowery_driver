@@ -41,7 +41,7 @@
   "emptyUserName": "Please enter your user name",
   "english": "English",
   "enterPassword": "Enter password",
-  "errorLoadingProductDetails": "Error loading product details" ,
+  "errorLoadingProductDetails": "Error loading product details",
   "exploreText": "Explore",
   "female": "Female",
   "firstNameHintText": "Enter first name",
@@ -132,5 +132,7 @@
   "locationError": "Location Error",
   "searchError": "Error occurred while searching",
   "searchForProducts": "Search for products",
-  "readyForDelivery": "Ready for delivery"
+  "readyForDelivery": "Ready for delivery",
+  "onboardingMessage": "Welcome to\nFlowery rider app",
+  "applyNow": "Apply Now"
 }

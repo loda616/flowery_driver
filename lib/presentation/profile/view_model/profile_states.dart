@@ -1,4 +1,4 @@
-import 'package:flowery_driver/domain/entity/profile/driver_entity.dart';
+import '../../../domain/entity/profile/driver_entity.dart';
 
 sealed class ProfileState {}
 
@@ -16,4 +16,3 @@ class GetLoggedDriverInfoErrorState extends ProfileState {
   final String? errorMessage;
   GetLoggedDriverInfoErrorState({this.errorMessage});
 }
-

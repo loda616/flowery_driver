@@ -1,10 +1,11 @@
-import 'package:flowery_driver/data/api/profile_api/profile_api_manager.dart';
-import 'package:flowery_driver/data/data_source/remote_data_source/profile/profile_remote_data_source.dart';
-import 'package:flowery_driver/data/model/profile/driver_model.dart';
 import 'package:injectable/injectable.dart';
+
 import '../../../../../core/api/api_result.dart';
 import '../../../../../core/api/execute_api_call.dart';
 import '../../../../../core/local/token_manger.dart';
+import '../../../api/profile_api/profile_api_manager.dart';
+import '../../../model/profile/driver_model.dart';
+import 'profile_remote_data_source.dart';
 
 @Injectable(as: ProfileRemoteDataSource)
 class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
@@ -19,6 +20,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       return driverModel?.driver;
     });
   }
+
   Future<String> _getToken() async {
     var token = await TokenManager.getToken();
     if (token == null || token.isEmpty) {
@@ -27,5 +29,3 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     return 'Bearer $token';
   }
 }
-
-

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,21 +11,20 @@ class CustomSwitchTitle extends StatelessWidget {
   final TextStyle? titleStyle;
   final String title;
 
-  const CustomSwitchTitle({
-    super.key,
-    required this.value,
-    required this.onChanged,
-    this.activeColor = Colors.white,
-    required this.activeTrackColor ,
-    this.inactiveThumbColor = Colors.white,
-    this.inactiveTrackColor = Colors.grey,
-    this.titleStyle,
-    required this.title
-  });
+  const CustomSwitchTitle(
+      {super.key,
+      required this.value,
+      required this.onChanged,
+      this.activeColor = Colors.white,
+      required this.activeTrackColor,
+      this.inactiveThumbColor = Colors.white,
+      this.inactiveTrackColor = Colors.grey,
+      this.titleStyle,
+      required this.title});
 
   @override
   Widget build(BuildContext context) {
-   // final local = S.of(context);
+    // final local = S.of(context);
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       child: Row(
@@ -44,11 +42,10 @@ class CustomSwitchTitle extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          Text(
-            title
-           // local.notification,
-           // style: AppFonts.font13BlackWeight400,
-          ),
+          Text(title
+              // local.notification,
+              // style: AppFonts.font13BlackWeight400,
+              ),
         ],
       ),
     );

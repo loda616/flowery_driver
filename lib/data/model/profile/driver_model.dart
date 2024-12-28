@@ -1,4 +1,4 @@
-import 'package:flowery_driver/domain/entity/profile/driver_entity.dart';
+import '../../../domain/entity/profile/driver_entity.dart';
 
 class DriverModel {
   DriverModel({
@@ -83,5 +83,6 @@ class DriverModel {
         phone: phone,
         photo: photo,
         email: email);
+    return null;
   }
 }

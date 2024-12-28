@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "anErrorOccurredWhileUpdatingTheProfile":
             MessageLookupByLibrary.simpleMessage(
                 "An error occurred while updating the profile"),
+        "applyNow": MessageLookupByLibrary.simpleMessage("Apply Now"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
         "bestSeller": MessageLookupByLibrary.simpleMessage("Best Seller"),
         "bestSellers": MessageLookupByLibrary.simpleMessage("Best Sellers"),
@@ -145,6 +146,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "occasionTitle": MessageLookupByLibrary.simpleMessage(
             "Bloom with our exquisite best sellers"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
+        "onboardingMessage": MessageLookupByLibrary.simpleMessage(
+            "Welcome to\nFlowery rider app"),
         "orderNumber": MessageLookupByLibrary.simpleMessage("order Number"),
         "otpSentToEmail": MessageLookupByLibrary.simpleMessage(
             "OTP sent to your email.\n Please check your Email"),

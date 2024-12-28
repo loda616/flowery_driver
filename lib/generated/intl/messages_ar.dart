@@ -34,6 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "anErrorOccurredWhileUpdatingTheProfile":
             MessageLookupByLibrary.simpleMessage(
                 "حدث خطأ أثناء تحديث الملف الشخصي"),
+        "applyNow": MessageLookupByLibrary.simpleMessage("قدم الآن"),
         "arabic": MessageLookupByLibrary.simpleMessage("العربيه"),
         "bestSeller": MessageLookupByLibrary.simpleMessage("الأكثر مبيعًا"),
         "bestSellers": MessageLookupByLibrary.simpleMessage("الأكثر مبيعًا"),
@@ -148,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "occasionTitle": MessageLookupByLibrary.simpleMessage(
             "تألق مع أفضل منتجاتنا مبيعًا"),
         "ok": MessageLookupByLibrary.simpleMessage("موافق"),
+        "onboardingMessage": MessageLookupByLibrary.simpleMessage(
+            "مرحبًا بك في\nتطبيق توصيل فلوري"),
         "orderNumber": MessageLookupByLibrary.simpleMessage("رقم الاوردر"),
         "otpSentToEmail": MessageLookupByLibrary.simpleMessage(
             "تم إرسال رمز التحقق إلى بريدك الإلكتروني.\n يرجى التحقق من بريدك الإلكتروني"),

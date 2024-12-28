@@ -5,7 +5,7 @@ import '../styles/fonts/app_fonts.dart';
 
 class AppTheme {
   static ThemeData appTheme = ThemeData(
-    scaffoldBackgroundColor: AppColors.kWhite,
+    scaffoldBackgroundColor: AppColors.kLightWhite,
     radioTheme: RadioThemeData(
       fillColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
