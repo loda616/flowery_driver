@@ -21,5 +21,10 @@ class ProfileRepositoryImpl implements ProfileRepository {
     }
   }
 
+  @override
+  Future<Result<String?>> logout() async{
+   return await profileRemoteDataSource.logout();
+  }
+
 
 }

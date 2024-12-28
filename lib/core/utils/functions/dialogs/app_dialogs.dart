@@ -4,7 +4,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../../styles/colors/app_colors.dart';
 import '../../../styles/fonts/app_fonts.dart';
-/***************
+import '../../../styles/images/app_images.dart';
 class AppDialogs {
   static Future<void> showLoading({
     required BuildContext context,
@@ -176,4 +176,3 @@ class AppDialogs {
     );
   }
 }
-***************/

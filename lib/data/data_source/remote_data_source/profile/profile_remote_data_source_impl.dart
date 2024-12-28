@@ -19,6 +19,15 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       return driverModel?.driver;
     });
   }
+  @override
+  Future<Result<String?>> logout() async{
+    return await executeApiCall<String?>(() async {
+      var token = await _getToken();
+      return await apiManger.logout(token);
+
+  }
+    );}
+
   Future<String> _getToken() async {
     var token = await TokenManager.getToken();
     if (token == null || token.isEmpty) {
@@ -26,6 +35,8 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     }
     return 'Bearer $token';
   }
+
+
 }
 
 

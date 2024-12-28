@@ -4,4 +4,5 @@ import '../../../../core/api/api_result.dart';
 
 abstract class ProfileRemoteDataSource {
   Future<Result<DriverModel?>> getLoggedDriverInfo();
+  Future<Result<String?>> logout();
 }

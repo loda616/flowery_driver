@@ -14,4 +14,8 @@ abstract class ProfileApiManager {
   @GET(ApiConstants.getLoggedDriverInfo)
   Future<DriverDataResponseModel?> getLoggedDriverInfo(
       @Header("Authorization") String token);
+
+  @GET(ApiConstants.logout)
+  Future<String?> logout(
+      @Header("Authorization") String token);
 }

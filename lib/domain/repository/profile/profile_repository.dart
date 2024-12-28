@@ -5,4 +5,5 @@ import '../../../../core/api/api_result.dart';
 
 abstract class ProfileRepository {
   Future<Result<DriverEntity?>> getLoggedDriverInfo();
+  Future<Result<String?>> logout();
 }
