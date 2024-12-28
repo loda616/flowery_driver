@@ -134,5 +134,19 @@
   "searchForProducts": "ابحث عن المنتجات",
   "readyForDelivery": "جاهز للتسليم ",
   "onboardingMessage": "مرحبًا بك في\nتطبيق توصيل فلوري",
-  "applyNow": "قدم الآن"
+  "applyNow": "قدم الآن",
+  "welcome": "مرحبًا!!",
+  "wantToBeDelivery": "هل تريد أن تكون سائق توصيل؟",
+  "joinOurTeam": "انضم إلى فريقنا",
+  "firstLegalName": "الاسم القانوني الأول",
+  "secondLegalName": "الاسم القانوني الثاني",
+  "country": "البلد",
+  "vehicle_number": "رقم المركبة",
+  "vehicle_number_hint": "أدخل رقم المركبة",
+  "vehicle_licence": "رخصة المركبة",
+  "vehicle_licence_hint": "رفع صورة الرخصة",
+  "id_number": "رقم الهوية",
+  "id_number_hint": "أدخل رقم الهوية",
+  "id_image": "صورة الهوية",
+  "id_image_hint": "رفع صورة الهوية"
 }

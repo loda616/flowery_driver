@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "continueAsGuestText":
             MessageLookupByLibrary.simpleMessage("Continue as Guest"),
         "continueText": MessageLookupByLibrary.simpleMessage("Continue"),
+        "country": MessageLookupByLibrary.simpleMessage("Country"),
         "createAccount": MessageLookupByLibrary.simpleMessage(
             "Creating an account, you agree to our\t"),
         "currentPassword":
@@ -99,6 +100,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Error loading product details"),
         "exploreText": MessageLookupByLibrary.simpleMessage("Explore"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
+        "firstLegalHintName":
+            MessageLookupByLibrary.simpleMessage("Enter First legal name"),
+        "firstLegalName":
+            MessageLookupByLibrary.simpleMessage("First legal name"),
         "firstNameHintText":
             MessageLookupByLibrary.simpleMessage("Enter first name"),
         "firstNameLabelText":
@@ -113,8 +118,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forget password?"),
         "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "homebottom": MessageLookupByLibrary.simpleMessage("Home"),
+        "id_image": MessageLookupByLibrary.simpleMessage("ID image"),
+        "id_image_hint":
+            MessageLookupByLibrary.simpleMessage("Upload licence photo"),
+        "id_number": MessageLookupByLibrary.simpleMessage("ID number"),
+        "id_number_hint":
+            MessageLookupByLibrary.simpleMessage("Enter ID number"),
         "inStock": MessageLookupByLibrary.simpleMessage("In stock"),
         "invalidCode": MessageLookupByLibrary.simpleMessage("Invalid code"),
+        "joinOurTeam": MessageLookupByLibrary.simpleMessage("Join our team"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lastNameHintText":
             MessageLookupByLibrary.simpleMessage("Enter last name"),
@@ -199,6 +211,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Search for products"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Search for products"),
+        "secondLegalHintName":
+            MessageLookupByLibrary.simpleMessage("Enter Second legal name"),
+        "secondLegalName":
+            MessageLookupByLibrary.simpleMessage("Second legal name"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("Sign up"),
         "signupEmailHintText":
             MessageLookupByLibrary.simpleMessage("Enter Email"),
@@ -232,7 +248,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "User profile edited successfully"),
         "validateEmailAddress":
             MessageLookupByLibrary.simpleMessage("This email is not valid"),
+        "vehicle_licence":
+            MessageLookupByLibrary.simpleMessage("Vehicle licence"),
+        "vehicle_licence_hint":
+            MessageLookupByLibrary.simpleMessage("Upload licence photo"),
+        "vehicle_number":
+            MessageLookupByLibrary.simpleMessage("Vehicle number"),
+        "vehicle_number_hint":
+            MessageLookupByLibrary.simpleMessage("Enter Vehicle number"),
         "viewAll": MessageLookupByLibrary.simpleMessage("View All"),
+        "wantToBeDelivery":
+            MessageLookupByLibrary.simpleMessage("Want to be a delivery man?"),
+        "welcome": MessageLookupByLibrary.simpleMessage("Welcome!!"),
         "yourCartIsEmptyGoBackAndAddSomeItems":
             MessageLookupByLibrary.simpleMessage(
                 "Your cart is empty. Go back and add some items")

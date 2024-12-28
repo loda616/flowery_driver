@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/extensions/navigation_ext.dart';
+import '../../../core/routes/page_route_name.dart';
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/styles/fonts/app_fonts.dart';
 import '../../../core/styles/images/app_images.dart';
@@ -29,14 +31,18 @@ class OnboardingScreen extends StatelessWidget {
               ),
               24.verticalSpace,
               CustomButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.pushNamed(PageRouteName.login);
+                },
                 color: AppColors.kPink,
                 text: (locale.loginTitle),
                 textStyle: AppFonts.font16LightWhiteWeight500,
               ),
               16.verticalSpace,
               CustomButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.pushNamed(PageRouteName.apply);
+                },
                 color: AppColors.kWhite,
                 text: (locale.applyNow),
                 textStyle: AppFonts.font16BlackWeight500,

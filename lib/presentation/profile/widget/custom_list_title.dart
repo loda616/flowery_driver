@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -37,7 +36,10 @@ class CustomListTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               if (leadingIcon != null) ...[
-                Icon(leadingIcon,size: 20.sp,),
+                Icon(
+                  leadingIcon,
+                  size: 20.sp,
+                ),
                 SizedBox(width: 8.w),
               ],
               Expanded(

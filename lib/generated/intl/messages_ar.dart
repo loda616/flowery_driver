@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "continueAsGuestText":
             MessageLookupByLibrary.simpleMessage("استمر كضيف"),
         "continueText": MessageLookupByLibrary.simpleMessage("استمرار"),
+        "country": MessageLookupByLibrary.simpleMessage("البلد"),
         "createAccount":
             MessageLookupByLibrary.simpleMessage("بإنشاء حساب، فإنك توافق على"),
         "currentPassword":
@@ -101,6 +102,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("خطأ في تحميل تفاصيل المنتج"),
         "exploreText": MessageLookupByLibrary.simpleMessage("استكشف"),
         "female": MessageLookupByLibrary.simpleMessage("أنثى"),
+        "firstLegalName":
+            MessageLookupByLibrary.simpleMessage("الاسم القانوني الأول"),
         "firstNameHintText":
             MessageLookupByLibrary.simpleMessage("أدخل الاسم الأول"),
         "firstNameLabelText":
@@ -115,8 +118,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("هل نسيت كلمة المرور؟"),
         "gender": MessageLookupByLibrary.simpleMessage("الجنس"),
         "homebottom": MessageLookupByLibrary.simpleMessage("الرئيسية"),
+        "id_image": MessageLookupByLibrary.simpleMessage("صورة الهوية"),
+        "id_image_hint":
+            MessageLookupByLibrary.simpleMessage("رفع صورة الهوية"),
+        "id_number": MessageLookupByLibrary.simpleMessage("رقم الهوية"),
+        "id_number_hint":
+            MessageLookupByLibrary.simpleMessage("أدخل رقم الهوية"),
         "inStock": MessageLookupByLibrary.simpleMessage("متوفر"),
         "invalidCode": MessageLookupByLibrary.simpleMessage("رمز غير صالح"),
+        "joinOurTeam": MessageLookupByLibrary.simpleMessage("انضم إلى فريقنا"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "lastNameHintText":
             MessageLookupByLibrary.simpleMessage("أدخل الاسم الأخير"),
@@ -203,6 +213,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchForProducts":
             MessageLookupByLibrary.simpleMessage("ابحث عن المنتجات"),
         "searchHint": MessageLookupByLibrary.simpleMessage("ابحث عن المنتجات"),
+        "secondLegalName":
+            MessageLookupByLibrary.simpleMessage("الاسم القانوني الثاني"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "signupEmailHintText":
             MessageLookupByLibrary.simpleMessage("أدخل البريد الإلكتروني"),
@@ -237,7 +249,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تم تعديل الملف الشخصي بنجاح"),
         "validateEmailAddress": MessageLookupByLibrary.simpleMessage(
             "هذا البريد الإلكتروني غير صالح"),
+        "vehicle_licence": MessageLookupByLibrary.simpleMessage("رخصة المركبة"),
+        "vehicle_licence_hint":
+            MessageLookupByLibrary.simpleMessage("رفع صورة الرخصة"),
+        "vehicle_number": MessageLookupByLibrary.simpleMessage("رقم المركبة"),
+        "vehicle_number_hint":
+            MessageLookupByLibrary.simpleMessage("أدخل رقم المركبة"),
         "viewAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
+        "wantToBeDelivery":
+            MessageLookupByLibrary.simpleMessage("هل تريد أن تكون سائق توصيل؟"),
+        "welcome": MessageLookupByLibrary.simpleMessage("مرحبًا!!"),
         "yourCartIsEmptyGoBackAndAddSomeItems":
             MessageLookupByLibrary.simpleMessage(
                 "سلة التسوق فارغة. عد وأضف بعض العناصر")

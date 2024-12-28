@@ -1409,6 +1409,166 @@ class S {
       args: [],
     );
   }
+
+  /// `Welcome!!`
+  String get welcome {
+    return Intl.message(
+      'Welcome!!',
+      name: 'welcome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Want to be a delivery man?`
+  String get wantToBeDelivery {
+    return Intl.message(
+      'Want to be a delivery man?',
+      name: 'wantToBeDelivery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Join our team`
+  String get joinOurTeam {
+    return Intl.message(
+      'Join our team',
+      name: 'joinOurTeam',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First legal name`
+  String get firstLegalName {
+    return Intl.message(
+      'First legal name',
+      name: 'firstLegalName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Second legal name`
+  String get secondLegalName {
+    return Intl.message(
+      'Second legal name',
+      name: 'secondLegalName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter First legal name`
+  String get firstLegalHintName {
+    return Intl.message(
+      'Enter First legal name',
+      name: 'firstLegalHintName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Second legal name`
+  String get secondLegalHintName {
+    return Intl.message(
+      'Enter Second legal name',
+      name: 'secondLegalHintName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Country`
+  String get country {
+    return Intl.message(
+      'Country',
+      name: 'country',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vehicle number`
+  String get vehicle_number {
+    return Intl.message(
+      'Vehicle number',
+      name: 'vehicle_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Vehicle number`
+  String get vehicle_number_hint {
+    return Intl.message(
+      'Enter Vehicle number',
+      name: 'vehicle_number_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vehicle licence`
+  String get vehicle_licence {
+    return Intl.message(
+      'Vehicle licence',
+      name: 'vehicle_licence',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload licence photo`
+  String get vehicle_licence_hint {
+    return Intl.message(
+      'Upload licence photo',
+      name: 'vehicle_licence_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID number`
+  String get id_number {
+    return Intl.message(
+      'ID number',
+      name: 'id_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter ID number`
+  String get id_number_hint {
+    return Intl.message(
+      'Enter ID number',
+      name: 'id_number_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID image`
+  String get id_image {
+    return Intl.message(
+      'ID image',
+      name: 'id_image',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload licence photo`
+  String get id_image_hint {
+    return Intl.message(
+      'Upload licence photo',
+      name: 'id_image_hint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../presentation/auth/apply/view/apply_screen.dart';
+import '../../presentation/auth/apply/view_model/apply_view_model.dart';
+import '../../presentation/auth/login/view/login_screen.dart';
+import '../../presentation/auth/login/view_model/login_cubit.dart';
 import '../../presentation/onboarding/presentation/onboarding_screen.dart';
 import '../../presentation/profile/view/my_profile_screen.dart';
+import '../di/di.dart';
 import 'page_route_name.dart';
 
 class AppRoutes {
@@ -9,6 +15,20 @@ class AppRoutes {
     switch (setting.name) {
       case PageRouteName.onBoarding:
         return _handleMaterialPageRoute(widget: OnboardingScreen());
+      case PageRouteName.login:
+        return _handleMaterialPageRoute(
+          widget: BlocProvider<LoginViewModel>(
+            create: (context) => getIt<LoginViewModel>(),
+            child: LogInScreen(),
+          ),
+        );
+      case PageRouteName.apply:
+        return _handleMaterialPageRoute(
+          widget: BlocProvider<ApplyViewModel>(
+            create: (context) => getIt<ApplyViewModel>(),
+            child: ApplyScreen(),
+          ),
+        );
       case PageRouteName.myProfile:
         return _handleMaterialPageRoute(widget: MyProfileScreen());
       default:

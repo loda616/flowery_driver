@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -27,51 +26,34 @@ class LogoutRow extends StatelessWidget {
                 width: 260.w,
                 height: 155.h,
                 decoration: BoxDecoration(
-                  borderRadius:
-                  BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
-                  crossAxisAlignment:
-                  CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: 15.h),
                     Text(
                       local.logOut,
-                      style: AppFonts
-                          .font18BlackWeight500
-                          .copyWith(
-                          fontWeight:
-                          FontWeight.w600),
+                      style: AppFonts.font18BlackWeight500
+                          .copyWith(fontWeight: FontWeight.w600),
                     ),
                     SizedBox(height: 5.h),
                     Text(
                       local.logoutConfirmationTitle,
-                      style: AppFonts
-                          .font16BlackWeight500
-                          .copyWith(
-                          fontWeight:
-                          FontWeight.w400),
+                      style: AppFonts.font16BlackWeight500
+                          .copyWith(fontWeight: FontWeight.w400),
                     ),
                     SizedBox(height: 24.h),
                     Row(
-                      mainAxisAlignment:
-                      MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
-                          style:
-                          ElevatedButton.styleFrom(
-                            minimumSize:
-                            Size(105.w, 40.h),
-                            backgroundColor:
-                            AppColors.kWhite,
-                            shape:
-                            RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(
-                                  50.r),
-                              side: BorderSide(
-                                  color: Colors.grey,
-                                  width: 1.w),
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(105.w, 40.h),
+                            backgroundColor: AppColors.kWhite,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.r),
+                              side: BorderSide(color: Colors.grey, width: 1.w),
                             ),
                           ),
                           onPressed: () {
@@ -79,42 +61,28 @@ class LogoutRow extends StatelessWidget {
                           },
                           child: Text(
                             local.cancelText,
-                            style: AppFonts
-                                .font14GreyWeight400,
+                            style: AppFonts.font14GreyWeight400,
                           ),
                         ),
                         SizedBox(width: 15.w),
                         ElevatedButton(
-                          style:
-                          ElevatedButton.styleFrom(
-                            minimumSize:
-                            Size(105.w, 40.h),
-                            backgroundColor:
-                            AppColors.kPink,
-                            shape:
-                            RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(
-                                  50.r),
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(105.w, 40.h),
+                            backgroundColor: AppColors.kPink,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.r),
                               side: BorderSide(
-                                  color: Colors
-                                      .transparent,
-                                  width: 1.w),
+                                  color: Colors.transparent, width: 1.w),
                             ),
                           ),
                           onPressed: () {
-                            Navigator.pop(
-                                context);
-                         //   viewModel.logout();
+                            Navigator.pop(context);
+                            //   viewModel.logout();
                           },
                           child: Text(
                             local.logOut,
-                            style: AppFonts
-                                .font15WhiteWeight500
-                                .copyWith(
-                                fontWeight:
-                                FontWeight
-                                    .w400),
+                            style: AppFonts.font15WhiteWeight500
+                                .copyWith(fontWeight: FontWeight.w400),
                           ),
                         ),
                       ],
@@ -127,6 +95,5 @@ class LogoutRow extends StatelessWidget {
         );
       },
     );
-
   }
 }

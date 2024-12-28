@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/styles/fonts/app_fonts.dart';
 
@@ -43,7 +44,10 @@ class VehicleInfoCard extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.center,
-                child: Icon(Icons.arrow_forward_ios_rounded,color: AppColors.kGray,),
+                child: Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: AppColors.kGray,
+                ),
               ),
             ],
           ),
