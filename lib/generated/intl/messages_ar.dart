@@ -255,6 +255,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "vehicle_number": MessageLookupByLibrary.simpleMessage("رقم المركبة"),
         "vehicle_number_hint":
             MessageLookupByLibrary.simpleMessage("أدخل رقم المركبة"),
+        "vehicle_type": MessageLookupByLibrary.simpleMessage("نوع المركبة"),
+        "vehicle_type_hint":
+            MessageLookupByLibrary.simpleMessage("أدخل نوع المركبة"),
         "viewAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
         "wantToBeDelivery":
             MessageLookupByLibrary.simpleMessage("هل تريد أن تكون سائق توصيل؟"),

@@ -1,28 +1,28 @@
 part of 'apply_view_model.dart';
 
-sealed class SignUpState {}
+sealed class ApplyState {}
 
-final class SignUpInitial extends SignUpState {}
+final class ApplyInitial extends ApplyState {}
 
-final class SignUpLoading extends SignUpState {}
+final class ApplyLoading extends ApplyState {}
 
-final class SignUpSuccess extends SignUpState {
+final class ApplySuccess extends ApplyState {
   final String? message;
 
-  SignUpSuccess(this.message);
+  ApplySuccess(this.message);
 }
 
-final class SignUpFail extends SignUpState {
+final class ApplyFail extends ApplyState {
   final String? errorMassage;
 
-  SignUpFail(this.errorMassage);
+  ApplyFail(this.errorMassage);
 }
 
-final class GetVehiclesTypesLoading extends SignUpState {}
+final class GetVehiclesTypesLoading extends ApplyState {}
 
-final class GetVehiclesTypesSuccess extends SignUpState {}
+final class GetVehiclesTypesSuccess extends ApplyState {}
 
-final class GetVehiclesTypesFail extends SignUpState {
+final class GetVehiclesTypesFail extends ApplyState {
   final String? errorMassage;
 
   GetVehiclesTypesFail(this.errorMassage);

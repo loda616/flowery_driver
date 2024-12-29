@@ -12,13 +12,11 @@ import '../functions/validators/validators.dart';
 import 'custom_text_form_field.dart';
 
 class CountryInputField extends StatefulWidget {
-  final TextEditingController? controller;
   final Function(String?)? onInputChanged;
   final Function(String)? onSelectCode;
 
   const CountryInputField({
     super.key,
-    this.controller,
     this.onInputChanged,
     this.onSelectCode,
   });
@@ -28,6 +26,22 @@ class CountryInputField extends StatefulWidget {
 }
 
 class _CountryInputFieldState extends State<CountryInputField> {
+  late final TextEditingController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController();
+    controller.text = 'Egypt';
+    widget.onInputChanged?.call('Egypt');
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   Country _selectedCountry = Country(
     isoCode: 'EG',
     iso3Code: 'EGY',
@@ -58,8 +72,9 @@ class _CountryInputFieldState extends State<CountryInputField> {
               }
               widget.onSelectCode?.call(country.phoneCode);
               widget.onInputChanged?.call(country.name);
-              setState(() => _selectedCountry = country);
-              widget.controller?.text = country.name;
+              controller.text = country.name;
+              _selectedCountry = country;
+              setState(() {});
             },
             priorityList: [
               CountryPickerUtils.getCountryByIsoCode('EG'),
@@ -94,9 +109,13 @@ class _CountryInputFieldState extends State<CountryInputField> {
     final locale = S.of(context);
 
     return CustomTextFormField(
+      controller: controller,
       hintText: locale.country,
       labelText: locale.country,
-      validator: Validators.validatePhoneNumber,
+      validator: (value) => Validators.validateNotEmpty(
+        title: locale.country,
+        value: value,
+      ),
       keyBordType: TextInputType.phone,
       onChanged: widget.onInputChanged,
       isFilled: true,

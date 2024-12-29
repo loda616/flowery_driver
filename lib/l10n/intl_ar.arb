@@ -148,5 +148,7 @@
   "id_number": "رقم الهوية",
   "id_number_hint": "أدخل رقم الهوية",
   "id_image": "صورة الهوية",
-  "id_image_hint": "رفع صورة الهوية"
+  "id_image_hint": "رفع صورة الهوية",
+  "vehicle_type": "نوع المركبة",
+  "vehicle_type_hint": "أدخل نوع المركبة"
 }

@@ -17,14 +17,15 @@ class TokenInterceptor extends Interceptor {
       if (token != null && token.isNotEmpty) {
         options.headers[AppConst.authHeaderTokenKey] = 'Bearer $token';
       } else {
-        handler.reject(
-          DioException(
-            requestOptions: options,
-            type: DioExceptionType.cancel,
-            message: 'Authorization token is missing. Please log in.',
-          ),
-        );
-        return;
+        return super.onRequest(options, handler);
+        // handler.reject(
+        //   DioException(
+        //     requestOptions: options,
+        //     type: DioExceptionType.cancel,
+        //     message: 'Authorization token is missing. Please log in.',
+        //   ),
+        // );
+        // return;
       }
     } catch (e) {
       handler.reject(

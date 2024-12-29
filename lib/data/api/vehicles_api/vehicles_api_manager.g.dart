@@ -30,7 +30,7 @@ class _VehiclesApiManager implements VehiclesApiManager {
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<VehicleTypesResponseModel>(Options(
-      method: 'POST',
+      method: 'GET',
       headers: _headers,
       extra: _extra,
     )

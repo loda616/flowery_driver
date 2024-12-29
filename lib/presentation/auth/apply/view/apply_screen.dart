@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/extensions/navigation_ext.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/functions/validators/validators.dart';
 import '../../../../core/utils/widget/country_picker.dart';
 import '../../../../core/utils/widget/custom_button.dart';
@@ -11,6 +14,7 @@ import '../../../../core/utils/widget/custom_text_form_field.dart';
 import '../../../../data/model/auth/requests/apply_request_model.dart';
 import '../../../../generated/l10n.dart';
 import '../view_model/apply_view_model.dart';
+import 'widgets/vehicle_type_picker.dart';
 
 class ApplyScreen extends StatefulWidget {
   static const String routeName = '/sign-up';
@@ -39,8 +43,8 @@ class _ApplyScreenState extends State<ApplyScreen> {
   Widget build(BuildContext context) {
     final local = S.of(context);
 
-    return BlocListener<ApplyViewModel, SignUpState>(
-      bloc: context.read<ApplyViewModel>(),
+    return BlocListener<ApplyViewModel, ApplyState>(
+      bloc: cubit,
       listener: (context, state) => _handelStateChange(state),
       child: Scaffold(
         appBar: AppBar(
@@ -51,7 +55,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
           ),
           leadingWidth: 40.w,
           title: Text(
-            local.signUpTitle,
+            local.applyNow,
             style: AppFonts.font20BlackWeight500,
           ),
         ),
@@ -85,7 +89,10 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   CustomTextFormField(
                     labelText: local.firstLegalName,
                     hintText: local.firstLegalHintName,
-                    validator: (value) => Validators.validateName(value),
+                    validator: (value) => Validators.validateNotEmpty(
+                      title: local.firstLegalName,
+                      value: value,
+                    ),
                     keyBordType: TextInputType.text,
                     onChanged: (value) {
                       applyRequestBodyModel.firstName = value;
@@ -95,24 +102,49 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   CustomTextFormField(
                     hintText: local.secondLegalHintName,
                     labelText: local.secondLegalName,
-                    validator: (value) => Validators.validateName(value),
+                    validator: (value) => Validators.validateNotEmpty(
+                      title: local.secondLegalName,
+                      value: value,
+                    ),
                     keyBordType: TextInputType.text,
                     onChanged: (value) {
                       applyRequestBodyModel.lastName = value;
                     },
                   ),
                   24.verticalSpace,
-                  // TODO: replace with vehicle type
-                  CountryInputField(
-                    onInputChanged: (value) {
-                      applyRequestBodyModel.vehicleTypeId = value;
-                    },
-                  ),
+                  BlocBuilder<ApplyViewModel, ApplyState>(
+                      bloc: cubit,
+                      buildWhen: (previous, current) {
+                        return current is GetVehiclesTypesLoading ||
+                            current is GetVehiclesTypesSuccess ||
+                            current is GetVehiclesTypesFail;
+                      },
+                      builder: (context, state) {
+                        bool isLoading = true;
+                        if (state is GetVehiclesTypesLoading) {
+                          isLoading = true;
+                        } else if (state is GetVehiclesTypesSuccess) {
+                          isLoading = false;
+                        } else if (state is GetVehiclesTypesSuccess) {
+                          isLoading = false;
+                        }
+                        return VehicleTypePicker(
+                          isLoading: isLoading,
+                          cubit: cubit,
+                          onChanged: (value) {
+                            applyRequestBodyModel.vehicleTypeId =
+                                value?.id ?? '';
+                          },
+                        );
+                      }),
                   24.verticalSpace,
                   CustomTextFormField(
                     hintText: local.vehicle_number_hint,
                     labelText: local.vehicle_number,
-                    validator: (value) => Validators.validateName(value),
+                    validator: (value) => Validators.validateNotEmpty(
+                      title: local.vehicle_number,
+                      value: value,
+                    ),
                     keyBordType: TextInputType.text,
                     onChanged: (value) {
                       applyRequestBodyModel.vehicleNumber = value;
@@ -122,7 +154,6 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   CustomTextFormField(
                     hintText: local.vehicle_licence_hint,
                     labelText: local.vehicle_licence,
-                    validator: (value) => Validators.validateName(value),
                     readOnly: true,
                     suffixIcon: GestureDetector(
                       onTap: () {},
@@ -133,7 +164,10 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   CustomTextFormField(
                     hintText: local.emailHintText,
                     labelText: local.emailLabelText,
-                    validator: (value) => Validators.validateEmail(value),
+                    validator: (value) => Validators.validateNotEmpty(
+                      title: local.emailLabelText,
+                      value: value,
+                    ),
                     keyBordType: TextInputType.text,
                     onChanged: (value) {
                       applyRequestBodyModel.email = value;
@@ -143,7 +177,10 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   CustomTextFormField(
                     hintText: local.phoneHintText,
                     labelText: local.phoneLabelText,
-                    validator: (value) => Validators.validatePhoneNumber(value),
+                    validator: (value) => Validators.validateNotEmpty(
+                      title: local.phoneLabelText,
+                      value: value,
+                    ),
                     keyBordType: TextInputType.phone,
                     textInputAction: TextInputAction.done,
                     onChanged: (value) {
@@ -159,7 +196,10 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   CustomTextFormField(
                     hintText: local.id_number_hint,
                     labelText: local.id_number,
-                    validator: (value) => Validators.validateName(value),
+                    validator: (value) => Validators.validateNotEmpty(
+                      title: local.id_number,
+                      value: value,
+                    ),
                     keyBordType: TextInputType.text,
                     onChanged: (value) {
                       applyRequestBodyModel.nationalId = value;
@@ -169,7 +209,6 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   CustomTextFormField(
                     hintText: local.id_image_hint,
                     labelText: local.id_image,
-                    validator: (value) => Validators.validateName(value),
                     keyBordType: TextInputType.text,
                     readOnly: true,
                     suffixIcon: GestureDetector(
@@ -231,6 +270,8 @@ class _ApplyScreenState extends State<ApplyScreen> {
                               onChanged: (value) {
                                 setState(() {
                                   _gender = value!;
+                                  applyRequestBodyModel.gender =
+                                      value.toLowerCase();
                                 });
                               },
                             ),
@@ -246,6 +287,8 @@ class _ApplyScreenState extends State<ApplyScreen> {
                               onChanged: (value) {
                                 setState(() {
                                   _gender = value!;
+                                  applyRequestBodyModel.gender =
+                                      value.toLowerCase();
                                 });
                               },
                             ),
@@ -262,6 +305,9 @@ class _ApplyScreenState extends State<ApplyScreen> {
                   CustomButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        applyRequestBodyModel.phone =
+                            '+2${applyRequestBodyModel.phone}';
+                        log(applyRequestBodyModel.toJson().toString());
                         cubit.apply(applyRequestBodyModel);
                       }
                     },
@@ -277,20 +323,20 @@ class _ApplyScreenState extends State<ApplyScreen> {
     );
   }
 
-  void _handelStateChange(SignUpState state) {
-    //   if (state is SignUpSuccess) {
-    //     Navigator.pop(context);
-    //     AppDialogs.showSuccessDialog(
-    //       context: context,
-    //       message: "Account Created Successfully.\n Please Login to proceed",
-    //       whenAnimationFinished: () => Navigator.pop(context),
-    //     );
-    //   } else if (state is SignUpFail) {
-    //     Navigator.pop(context);
-    //     AppDialogs.showErrorDialog(
-    //         context: context, errorMassage: state.errorMassage ?? "");
-    //   } else if (state is SignUpLoading) {
-    //     AppDialogs.showLoading(context: context);
-    //   }
+  void _handelStateChange(ApplyState state) {
+    if (state is ApplySuccess) {
+      Navigator.pop(context);
+      AppDialogs.showSuccessDialog(
+        context: context,
+        message: "Account Created Successfully.\n Please Login to proceed",
+        whenAnimationFinished: () => Navigator.pop(context),
+      );
+    } else if (state is ApplyFail) {
+      Navigator.pop(context);
+      AppDialogs.showErrorDialog(
+          context: context, errorMassage: state.errorMassage ?? "");
+    } else if (state is ApplyLoading) {
+      AppDialogs.showLoading(context: context);
+    }
   }
 }

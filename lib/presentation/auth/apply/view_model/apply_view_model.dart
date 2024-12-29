@@ -10,14 +10,14 @@ import '../../../../domain/use_case/vehicles/get_all_vehicles_use_case.dart';
 part 'apply_state.dart';
 
 @injectable
-class ApplyViewModel extends BaseViewModel<SignUpState> {
+class ApplyViewModel extends BaseViewModel<ApplyState> {
   final SignUpUseCase _signUpUseCase;
   final GetAllVehiclesUseCase _getAllVehiclesUseCase;
 
   ApplyViewModel(
     this._signUpUseCase,
     this._getAllVehiclesUseCase,
-  ) : super(SignUpInitial());
+  ) : super(ApplyInitial());
 
   List<VehicleType> vehicleTypes = [];
 
@@ -39,16 +39,16 @@ class ApplyViewModel extends BaseViewModel<SignUpState> {
   }
 
   void apply(ApplyRequestBodyModel signUpData) async {
-    emit(SignUpLoading());
+    emit(ApplyLoading());
     final response = await _signUpUseCase.invoke(signUpData);
 
     switch (response) {
       case Success<String?>():
-        emit(SignUpSuccess(response.data));
+        emit(ApplySuccess(response.data));
 
       case Fail<String?>():
         emit(
-          SignUpFail(getErrorMassageFromException(response.exception)),
+          ApplyFail(getErrorMassageFromException(response.exception)),
         );
     }
   }

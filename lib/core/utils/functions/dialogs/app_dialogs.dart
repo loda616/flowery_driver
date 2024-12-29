@@ -1,5 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
-/***************
+import '../../../styles/animations/app_animations.dart';
+import '../../../styles/colors/app_colors.dart';
+import '../../../styles/fonts/app_fonts.dart';
+
 class AppDialogs {
   static Future<void> showLoading({
     required BuildContext context,
@@ -11,7 +17,7 @@ class AppDialogs {
         return PopScope(
           canPop: false,
           child: Lottie.asset(
-            AppImages.pinkLoadingAnimation,
+            AppAnimations.pinkLoadingAnimation,
             height: 50.h,
             width: 20.w,
           ),
@@ -28,7 +34,7 @@ class AppDialogs {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.kWhite,
-     //   icon: Lottie.asset(AppImages.pinkErrorAnimation, height: 80.h),
+        icon: Lottie.asset(AppAnimations.pinkErrorAnimation, height: 80.h),
         content: Text(
           textAlign: TextAlign.center,
           errorMassage,
@@ -61,7 +67,7 @@ class AppDialogs {
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.kWhite,
         icon: Lottie.asset(
-          AppImages.pinkDoneAnimation,
+          AppAnimations.pinkDoneAnimation,
           height: 80.h,
           repeat: false,
           onLoaded: (composition) {
@@ -171,4 +177,3 @@ class AppDialogs {
     );
   }
 }
-***************/

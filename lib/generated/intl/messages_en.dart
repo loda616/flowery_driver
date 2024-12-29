@@ -256,6 +256,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vehicle number"),
         "vehicle_number_hint":
             MessageLookupByLibrary.simpleMessage("Enter Vehicle number"),
+        "vehicle_type": MessageLookupByLibrary.simpleMessage("Vehicle type"),
+        "vehicle_type_hint":
+            MessageLookupByLibrary.simpleMessage("Enter vehicle type"),
         "viewAll": MessageLookupByLibrary.simpleMessage("View All"),
         "wantToBeDelivery":
             MessageLookupByLibrary.simpleMessage("Want to be a delivery man?"),

@@ -13,6 +13,6 @@ abstract class VehiclesApiManager {
   @factoryMethod
   factory VehiclesApiManager(Dio dio) = _VehiclesApiManager;
 
-  @POST(ApiConstants.getAllVehiclesType)
+  @GET(ApiConstants.getAllVehiclesType)
   Future<VehicleTypesResponseModel> getAllVehiclesType();
 }

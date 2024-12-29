@@ -1570,6 +1570,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Vehicle type`
+  String get vehicle_type {
+    return Intl.message(
+      'Vehicle type',
+      name: 'vehicle_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter vehicle type`
+  String get vehicle_type_hint {
+    return Intl.message(
+      'Enter vehicle type',
+      name: 'vehicle_type_hint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

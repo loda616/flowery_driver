@@ -150,5 +150,7 @@
   "id_number": "ID number",
   "id_number_hint": "Enter ID number",
   "id_image": "ID image",
-  "id_image_hint": "Upload licence photo"
+  "id_image_hint": "Upload licence photo",
+  "vehicle_type": "Vehicle type",
+  "vehicle_type_hint": "Enter vehicle type"
 }
