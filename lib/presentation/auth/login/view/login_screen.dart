@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/extensions/navigation_ext.dart';
+import '../../../../core/routes/page_route_name.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/functions/validators/validators.dart';
 import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../core/utils/widget/custom_text_form_field.dart';
@@ -74,38 +76,35 @@ class _LogInScreenState extends State<LogInScreen> {
                 children: [
                   24.verticalSpace,
                   BlocListener<LoginViewModel, LoginScreenState>(
-                    listenWhen: (previous, current) {
-                      return current is! InitialState;
-                    },
                     listener: (context, state) {
-                      // switch (state) {
-                      //   case LoadingState():
-                      //     {
-                      //       AppDialogs.showLoading(context: context);
-                      //     }
-                      //   case ErrorState():
-                      //     {
-                      //       AppDialogs.showHideDialog(context);
-                      //       AppDialogs.showErrorDialog(
-                      //         context: context,
-                      //         errorMassage: state.message ?? "",
-                      //       );
-                      //     }
-                      //   case SuccessState():
-                      //     {
-                      //       Navigator.of(context).pop();
-                      //       AppDialogs.showSuccessDialog(
-                      //         context: context,
-                      //         message: local.userLoggedInSuccessfully,
-                      //         whenAnimationFinished: () {
-                      //           Navigator.pushReplacementNamed(
-                      //               context, PageRouteName.homeLayout);
-                      //         },
-                      //       );
-                      //     }
-                      //   default:
-                      //     {}
-                      // }
+                      switch (state) {
+                        case LoadingState():
+                          {
+                            AppDialogs.showLoading(context: context);
+                          }
+                        case ErrorState():
+                          {
+                            AppDialogs.showHideDialog(context);
+                            AppDialogs.showErrorDialog(
+                              context: context,
+                              errorMassage: state.message ?? "",
+                            );
+                          }
+                        case SuccessState():
+                          {
+                            Navigator.of(context).pop();
+                            AppDialogs.showSuccessDialog(
+                              context: context,
+                              message: local.userLoggedInSuccessfully,
+                              whenAnimationFinished: () {
+                                // Navigator.pushReplacementNamed(
+                                //     context, PageRouteName.homeLayout);
+                              },
+                            );
+                          }
+                        default:
+                          {}
+                      }
                     },
                     child: Column(
                       children: [
@@ -149,8 +148,8 @@ class _LogInScreenState extends State<LogInScreen> {
                             const Spacer(),
                             GestureDetector(
                               onTap: () {
-                                // Navigator.pushNamed(
-                                //     context, PageRouteName.forgetPassword);
+                                Navigator.pushNamed(
+                                    context, PageRouteName.forgetPassword);
                               },
                               child: Text(
                                 (S.of(context).forgetPasswordText),

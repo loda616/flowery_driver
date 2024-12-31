@@ -8,6 +8,7 @@ import 'pin_code_file.dart';
 
 class EmailVerificationWidget extends StatelessWidget {
   final ForgetPasswordCubit viewModel;
+
   const EmailVerificationWidget({super.key, required this.viewModel});
 
   @override

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../../core/utils/functions/validators/validators.dart';
 import '../../../../../../core/utils/widget/custom_text_form_field.dart';
 import '../../../../../../generated/l10n.dart';
@@ -94,21 +96,25 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   }
 
   dynamic _handelStateChange(ForgotPasswordStates state) {
-    // if (state is ForgotPasswordSuccessState) {
-    //   AppDialogs.showSuccessDialog(
-    //     context: context,
-    //     message: "OTP sent to your email.\n Please check your Email",
-    //     whenAnimationFinished: () =>
-    //         Navigator.pushNamed(context, PageRouteName.passwordVerification),
-    //   );
-    // } else if (state is ForgotPasswordErrorState) {
-    //   Navigator.pop(context);
-    //   AppDialogs.showErrorDialog(
-    //       context: context, errorMassage: state.errorMassage ?? "");
-    // } else if (state is ForgotPasswordLoadingState) {
-    //   AppDialogs.showLoading(
-    //     context: context,
-    //   );
-    // }
+    if (state is ForgotPasswordSuccessState) {
+      Navigator.pop(context);
+
+      AppDialogs.showSuccessDialog(
+        context: context,
+        message: "OTP sent to your email.\n Please check your Email",
+        whenAnimationFinished: () => Navigator.pushNamed(
+            context, PageRouteName.verifyOtp,
+            arguments: viewModel),
+      );
+    } else if (state is ForgotPasswordErrorState) {
+      Navigator.pop(context);
+
+      AppDialogs.showErrorDialog(
+          context: context, errorMassage: state.errorMassage ?? "");
+    } else if (state is ForgotPasswordLoadingState) {
+      AppDialogs.showLoading(
+        context: context,
+      );
+    }
   }
 }

@@ -95,8 +95,8 @@ class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {
 
   Future<void> resetPassword(String newPassword) async {
     emit(ResetPasswordLoadingState(loadingMessage: "loading..."));
-    final result =
-        await resetPasswordUseCase.invoke(email: '', newPassword: newPassword);
+    final result = await resetPasswordUseCase.invoke(
+        email: userEmail ?? '', newPassword: newPassword);
     switch (result) {
       case Success<String?>():
         emit(ResetPasswordSuccessState(success: result.data));
