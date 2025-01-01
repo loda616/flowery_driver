@@ -1,6 +1,7 @@
 import 'package:flowery_driver/data/api/profile_api/profile_api_manager.dart';
 import 'package:flowery_driver/data/data_source/remote_data_source/profile/profile_remote_data_source.dart';
 import 'package:flowery_driver/data/model/profile/driver_model.dart';
+import 'package:flowery_driver/data/model/profile/vehicle_model.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../../core/api/api_result.dart';
 import '../../../../../core/api/execute_api_call.dart';
@@ -24,9 +25,17 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     return await executeApiCall<String?>(() async {
       var token = await _getToken();
       return await apiManger.logout(token);
-
   }
     );}
+
+  @override
+  Future<Result<VehicleModel?>> getVehicleInfo(String vehicleId) async {
+    return await executeApiCall<VehicleModel?>(() async {
+      var token = await _getToken();
+      var vehicleModel = await apiManger.getVehicleInfo(token,vehicleId);
+      return vehicleModel?.vehicle;
+    });
+  }
 
   Future<String> _getToken() async {
     var token = await TokenManager.getToken();
@@ -35,7 +44,6 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     }
     return 'Bearer $token';
   }
-
 
 }
 
