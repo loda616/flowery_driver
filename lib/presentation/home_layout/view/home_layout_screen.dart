@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/di/di.dart';
 import '../../profile/view/my_profile_screen.dart';
+import '../../profile/view_model/profile_view_model.dart';
 import 'widgets/bottom_navigation_bar.dart';
 
 class HomeLayoutScreen extends StatefulWidget {
@@ -24,7 +27,16 @@ class _HomeLayoutScreenState extends State<HomeLayoutScreen> {
       Scaffold(
         body: Text('Home'),
       ),
-      MyProfileScreen(),
+      BlocProvider(
+        create: (context) => getIt<ProfileCubit>(),
+        child: MyProfileScreen(
+          onBackPressed: () {
+            setState(() {
+              currentIndex = 0;
+            });
+          },
+        ),
+      ),
     ];
   }
 

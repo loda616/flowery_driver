@@ -10,9 +10,8 @@ class GetLoggedDriverInfoLoadingState extends ProfileState {}
 
 class GetLoggedDriverInfoSuccessState extends ProfileState {
   final DriverEntity? driver;
-  final VehicleEntity? vehicle;
 
-  GetLoggedDriverInfoSuccessState({this.driver, this.vehicle});
+  GetLoggedDriverInfoSuccessState({this.driver});
 }
 
 class GetLoggedDriverInfoErrorState extends ProfileState {
@@ -20,12 +19,12 @@ class GetLoggedDriverInfoErrorState extends ProfileState {
   GetLoggedDriverInfoErrorState({this.errorMessage});
 }
 
-/******************
 //GetVehicleInfoStates
 class GetVehicleInfoLoadingState extends ProfileState {}
 
 class GetVehicleInfoSuccessState extends ProfileState {
   final VehicleEntity? vehicle;
+
   GetVehicleInfoSuccessState({
     this.vehicle,
   });
@@ -35,7 +34,7 @@ class GetVehicleInfoErrorState extends ProfileState {
   final String? errorMessage;
   GetVehicleInfoErrorState({this.errorMessage});
 }
-**************/
+
 //LogoutStates
 class LogoutSuccessState extends ProfileState {
   String? message;

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/di/di.dart';
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/styles/fonts/app_fonts.dart';
 import '../../../core/utils/functions/dialogs/app_dialogs.dart';
@@ -16,8 +15,9 @@ import '../widget/person_info_card.dart';
 import '../widget/vehicle_info_card.dart';
 
 class MyProfileScreen extends StatefulWidget {
-  MyProfileScreen({super.key});
-  bool isNotificationEnabled = true;
+  final VoidCallback? onBackPressed;
+
+  const MyProfileScreen({super.key, this.onBackPressed});
 
   @override
   State<MyProfileScreen> createState() => _MyProfileScreenState();
@@ -25,11 +25,12 @@ class MyProfileScreen extends StatefulWidget {
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
   late ProfileCubit viewModel;
+  bool isNotificationEnabled = true;
 
   @override
   void initState() {
     super.initState();
-    viewModel = getIt.get<ProfileCubit>();
+    viewModel = context.read<ProfileCubit>();
     viewModel.getLoggedUserInfo();
   }
 
@@ -55,7 +56,10 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               local.profileText,
               style: AppFonts.font20BlackWeight500,
             ),
-            leading: Icon(Icons.arrow_back_ios_rounded),
+            leading: InkWell(
+              onTap: widget.onBackPressed,
+              child: Icon(Icons.arrow_back_ios_rounded),
+            ),
           ),
           body: SingleChildScrollView(
             child: Column(
@@ -65,12 +69,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   children: [
                     CustomSwitchTitle(
                       activeTrackColor: AppColors.kGreen,
-                      value: widget.isNotificationEnabled,
+                      value: isNotificationEnabled,
                       title: local.readyForDelivery,
                       titleStyle: AppFonts.font18BlackWeight500,
                       onChanged: (bool newValue) {
                         setState(() {
-                          widget.isNotificationEnabled = newValue;
+                          isNotificationEnabled = newValue;
                         });
                       },
                     ),

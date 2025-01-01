@@ -20,11 +20,16 @@ class _PersonInfoCardState extends State<PersonInfoCard> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
+      buildWhen: (previous, current) =>
+          current is GetLoggedDriverInfoLoadingState ||
+          current is GetLoggedDriverInfoSuccessState ||
+          current is GetLoggedDriverInfoErrorState,
       builder: (context, state) {
         if (state is GetLoggedDriverInfoLoadingState) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            if (mounted) AppDialogs.showLoading(context: context);
-          });
+          // WidgetsBinding.instance.addPostFrameCallback((_) {
+          //   if (mounted) AppDialogs.showLoading(context: context);
+          // });
+          return CircularProgressIndicator();
         } else if (state is GetLoggedDriverInfoErrorState) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (mounted) {

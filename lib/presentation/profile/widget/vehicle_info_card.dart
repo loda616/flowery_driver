@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/styles/fonts/app_fonts.dart';
-import '../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../view_model/profile_states.dart';
 import '../view_model/profile_view_model.dart';
 
@@ -19,14 +18,14 @@ class _VehicleInfoCardState extends State<VehicleInfoCard> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
+      buildWhen: (previous, current) =>
+          current is GetVehicleInfoLoadingState ||
+          current is GetVehicleInfoSuccessState ||
+          current is GetVehicleInfoErrorState,
       builder: (context, state) {
-        if (state is GetLoggedDriverInfoLoadingState) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            if (mounted) AppDialogs.showLoading(context: context);
-          });
-          return Container();
-        }
-        if (state is GetLoggedDriverInfoSuccessState) {
+        if (state is GetVehicleInfoLoadingState) {
+          return SizedBox();
+        } else if (state is GetVehicleInfoSuccessState) {
           return Padding(
             padding: EdgeInsets.all(8.0.sp),
             child: Container(
@@ -34,7 +33,7 @@ class _VehicleInfoCardState extends State<VehicleInfoCard> {
                 borderRadius: BorderRadius.circular(15.r),
                 border: Border.all(color: AppColors.kLighterGrey, width: 1.w),
               ),
-              height: 80.h,
+              height: 100.h,
               width: 343.w,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -58,7 +57,11 @@ class _VehicleInfoCardState extends State<VehicleInfoCard> {
                             ),
                             10.horizontalSpace,
                             Text(
-                              state.driver?.vehicleNumber ?? "123456",
+                              context
+                                      .read<ProfileCubit>()
+                                      .driver
+                                      ?.vehicleNumber ??
+                                  "123456",
                               style: AppFonts.font16BlackWeight400.copyWith(
                                 color: AppColors.kGray,
                               ),
@@ -79,8 +82,9 @@ class _VehicleInfoCardState extends State<VehicleInfoCard> {
               ),
             ),
           );
+        } else {
+          return Container();
         }
-        return Container();
       },
     );
   }

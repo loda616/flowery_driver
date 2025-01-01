@@ -40,6 +40,8 @@ import '../../domain/use_case/auth/reset_password_use_case.dart' as _i603;
 import '../../domain/use_case/auth/verify_reset_code_use_case.dart' as _i759;
 import '../../domain/use_case/profile/get_logged_driver_info_use_case.dart'
     as _i337;
+import '../../domain/use_case/profile/get_vehicle_info_use_case.dart' as _i897;
+import '../../domain/use_case/profile/logout_use_case.dart' as _i147;
 import '../../domain/use_case/vehicles/get_all_vehicles_use_case.dart'
     as _i1011;
 import '../../presentation/auth/apply/view_model/apply_view_model.dart'
@@ -99,9 +101,13 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i156.SignUpUseCase(gh<_i912.AuthRepository>()));
     gh.factory<_i97.LoginViewModel>(
         () => _i97.LoginViewModel(gh<_i408.LogInUseCase>()));
+    gh.factory<_i147.LogoutUseCase>(
+        () => _i147.LogoutUseCase(gh<_i742.ProfileRepository>()));
     gh.factory<_i337.GetLoggedDriverInfoUseCase>(() =>
         _i337.GetLoggedDriverInfoUseCase(
             profileRepository: gh<_i742.ProfileRepository>()));
+    gh.factory<_i897.GetVehicleInfoUseCase>(() => _i897.GetVehicleInfoUseCase(
+        profileRepository: gh<_i742.ProfileRepository>()));
     gh.factory<_i759.ApplyViewModel>(() => _i759.ApplyViewModel(
           gh<_i156.SignUpUseCase>(),
           gh<_i1011.GetAllVehiclesUseCase>(),
@@ -111,8 +117,11 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i759.VerifyResetCodeUseCase>(),
           gh<_i603.ResetPasswordUseCase>(),
         ));
-    gh.factory<_i671.ProfileCubit>(
-        () => _i671.ProfileCubit(gh<_i337.GetLoggedDriverInfoUseCase>()));
+    gh.factory<_i671.ProfileCubit>(() => _i671.ProfileCubit(
+          gh<_i337.GetLoggedDriverInfoUseCase>(),
+          gh<_i147.LogoutUseCase>(),
+          gh<_i897.GetVehicleInfoUseCase>(),
+        ));
     return this;
   }
 }
