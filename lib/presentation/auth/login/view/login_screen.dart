@@ -97,8 +97,8 @@ class _LogInScreenState extends State<LogInScreen> {
                               context: context,
                               message: local.userLoggedInSuccessfully,
                               whenAnimationFinished: () {
-                                // Navigator.pushReplacementNamed(
-                                //     context, PageRouteName.homeLayout);
+                                Navigator.pushReplacementNamed(
+                                    context, PageRouteName.layout);
                               },
                             );
                           }

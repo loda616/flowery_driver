@@ -33,6 +33,7 @@ dependencies:
   retrofit: ^4.4.1
   shared_preferences: ^2.3.3
   shimmer: ^3.0.0
+  svg_flutter: ^0.0.1
 
 dev_dependencies:
   bloc_test: ^9.1.7
