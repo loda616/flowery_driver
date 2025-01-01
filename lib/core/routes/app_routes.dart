@@ -1,3 +1,4 @@
+import 'package:flowery_driver/presentation/auth/forgot_password/view/widgets/reset_password_widget/reset_password_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,6 +28,13 @@ class AppRoutes {
           widget: BlocProvider<ApplyViewModel>(
             create: (context) => getIt<ApplyViewModel>(),
             child: ApplyScreen(),
+          ),
+        );
+      case PageRouteName.restPassword:
+        return _handleMaterialPageRoute(
+          widget: BlocProvider<ApplyViewModel>(
+            create: (context) => getIt<ApplyViewModel>(),
+            child: ResetPasswordViewBody(),
           ),
         );
       case PageRouteName.myProfile:

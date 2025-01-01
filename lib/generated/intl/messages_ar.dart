@@ -162,6 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onboardingMessage": MessageLookupByLibrary.simpleMessage(
             "مرحبًا بك في\nتطبيق توصيل فلوري"),
         "orderNumber": MessageLookupByLibrary.simpleMessage("رقم الاوردر"),
+        "orders": MessageLookupByLibrary.simpleMessage("طلباتي"),
         "otpSentToEmail": MessageLookupByLibrary.simpleMessage(
             "تم إرسال رمز التحقق إلى بريدك الإلكتروني.\n يرجى التحقق من بريدك الإلكتروني"),
         "passwordAppBarTitle":
