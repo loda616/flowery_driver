@@ -12,6 +12,7 @@ import '../../presentation/auth/login/view/login_screen.dart';
 import '../../presentation/auth/login/view_model/login_cubit.dart';
 import '../../presentation/onboarding/presentation/onboarding_screen.dart';
 import '../../presentation/profile/view/my_profile_screen.dart';
+import '../../presentation/profile/view_model/profile_view_model.dart';
 import '../di/di.dart';
 import 'page_route_name.dart';
 
@@ -63,8 +64,15 @@ class AppRoutes {
 
       case PageRouteName.layout:
         return _handleMaterialPageRoute(widget: HomeLayoutScreen());
+
       case PageRouteName.myProfile:
-        return _handleMaterialPageRoute(widget: MyProfileScreen());
+        return _handleMaterialPageRoute(
+          widget: BlocProvider(
+            create: (context) => getIt.get<ProfileCubit>(),
+            child: MyProfileScreen(),
+          ),
+        );
+
       default:
         return _handleMaterialPageRoute(widget: const Scaffold());
     }

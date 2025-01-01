@@ -7,4 +7,6 @@ class ApiConstants {
   static const String resetPassword = 'api/v1/drivers/resetPassword';
   static const String getLoggedDriverInfo = "api/v1/drivers/profile-data";
   static const String getAllVehiclesType = "api/v1/vehicles";
+  static const String getVehicleInfo = "api/v1/vehicles";
+  static const String logout = "api/v1/drivers/logout";
 }

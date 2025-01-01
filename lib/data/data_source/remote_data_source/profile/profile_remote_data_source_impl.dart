@@ -1,3 +1,4 @@
+import 'package:flowery_driver/data/model/profile/vehicle_model.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/api/api_result.dart';
@@ -18,6 +19,23 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       var token = await _getToken();
       var driverModel = await apiManger.getLoggedDriverInfo(token);
       return driverModel?.driver;
+    });
+  }
+
+  @override
+  Future<Result<String?>> logout() async {
+    return await executeApiCall<String?>(() async {
+      var token = await _getToken();
+      return await apiManger.logout(token);
+    });
+  }
+
+  @override
+  Future<Result<VehicleModel?>> getVehicleInfo(String vehicleId) async {
+    return await executeApiCall<VehicleModel?>(() async {
+      var token = await _getToken();
+      var vehicleModel = await apiManger.getVehicleInfo(token, vehicleId);
+      return vehicleModel?.vehicle;
     });
   }
 
