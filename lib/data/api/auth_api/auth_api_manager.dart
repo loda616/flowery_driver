@@ -24,9 +24,8 @@ abstract class AuthApiManager {
       @Body() LoginRequestBodyModel loginRequestBody);
 
   @POST(ApiConstants.apply)
-  @MultiPart()
   Future<SignUpResponseModel> apply(
-    @Part() ApplyRequestBodyModel signUpRequestBody,
+    @Body() ApplyRequestBodyModel signUpRequestBody,
   );
 
   @POST(ApiConstants.forgotPassword)

@@ -64,16 +64,12 @@ class _AuthApiManager implements AuthApiManager {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = FormData();
-    _data.fields.add(MapEntry(
-      'signUpRequestBody',
-      jsonEncode(signUpRequestBody),
-    ));
+    final _data = <String, dynamic>{};
+    _data.addAll(signUpRequestBody.toJson());
     final _options = _setStreamType<SignUpResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
-      contentType: 'multipart/form-data',
     )
         .compose(
           _dio.options,
