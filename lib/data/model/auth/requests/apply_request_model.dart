@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+
 class ApplyRequestBodyModel {
   String? country;
   String? firstName;
@@ -45,5 +47,25 @@ class ApplyRequestBodyModel {
       "gender": gender,
       "phone": phone,
     };
+  }
+
+  Future<FormData> toFormData() async {
+    return FormData.fromMap({
+      "country": country,
+      "firstName": firstName,
+      "lastName": lastName,
+      "vehicleType": vehicleTypeId,
+      "vehicleNumber": vehicleNumber,
+      "vehicleLicense": vehicleLicense,
+      "NID": nationalId,
+      "NIDImg": nationalIdImage != null
+          ? await MultipartFile.fromFile(nationalIdImage!)
+          : null,
+      "email": email,
+      "password": password,
+      "rePassword": rePassword,
+      "gender": gender,
+      "phone": phone,
+    });
   }
 }

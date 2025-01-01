@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -22,8 +24,9 @@ abstract class AuthApiManager {
       @Body() LoginRequestBodyModel loginRequestBody);
 
   @POST(ApiConstants.apply)
+  @MultiPart()
   Future<SignUpResponseModel> apply(
-    @Body() ApplyRequestBodyModel signUpRequestBody,
+    @Part() ApplyRequestBodyModel signUpRequestBody,
   );
 
   @POST(ApiConstants.forgotPassword)

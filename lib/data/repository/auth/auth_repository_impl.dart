@@ -35,7 +35,7 @@ class AuthRepositoryImpl extends AuthRepository {
           return Fail(exception: exception);
         }
 
-        TokenManager.setToken(token: token);
+        await TokenManager.setToken(token: token);
 
         return Success();
 

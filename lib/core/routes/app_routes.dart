@@ -1,4 +1,6 @@
+import 'package:flowery_driver/presentation/auth/forgot_password/view/widgets/forgot_password_widget/forget_password_screen.dart';
 import 'package:flowery_driver/presentation/auth/forgot_password/view/widgets/reset_password_widget/reset_password_widget.dart';
+import 'package:flowery_driver/presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,6 +18,7 @@ class AppRoutes {
     switch (setting.name) {
       case PageRouteName.onBoarding:
         return _handleMaterialPageRoute(widget: OnboardingScreen());
+
       case PageRouteName.login:
         return _handleMaterialPageRoute(
           widget: BlocProvider<LoginViewModel>(
@@ -23,6 +26,7 @@ class AppRoutes {
             child: LogInScreen(),
           ),
         );
+
       case PageRouteName.apply:
         return _handleMaterialPageRoute(
           widget: BlocProvider<ApplyViewModel>(
@@ -30,6 +34,23 @@ class AppRoutes {
             child: ApplyScreen(),
           ),
         );
+
+      case PageRouteName.forgetPassword:
+        return _handleMaterialPageRoute(
+          widget: BlocProvider<ForgetPasswordCubit>(
+            create: (context) => getIt<ForgetPasswordCubit>(),
+            child: ForgetPassword(),
+          ),
+        );
+
+      case PageRouteName.verifyOtp:
+        final cubit = setting.arguments as ForgetPasswordCubit;
+        return _handleMaterialPageRoute(
+          widget: EmailVerification(
+            viewModel: cubit,
+          ),
+        );
+
       case PageRouteName.restPassword:
         return _handleMaterialPageRoute(
           widget: BlocProvider<ApplyViewModel>(
