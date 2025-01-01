@@ -770,6 +770,16 @@ class S {
     );
   }
 
+  /// `Orders`
+  String get orders {
+    return Intl.message(
+      'Orders',
+      name: 'orders',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `OTP sent to your email.\n Please check your Email`
   String get otpSentToEmail {
     return Intl.message(

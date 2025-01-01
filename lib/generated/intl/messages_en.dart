@@ -161,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onboardingMessage": MessageLookupByLibrary.simpleMessage(
             "Welcome to\nFlowery rider app"),
         "orderNumber": MessageLookupByLibrary.simpleMessage("order Number"),
+        "orders": MessageLookupByLibrary.simpleMessage("Orders"),
         "otpSentToEmail": MessageLookupByLibrary.simpleMessage(
             "OTP sent to your email.\n Please check your Email"),
         "passwordAppBarTitle": MessageLookupByLibrary.simpleMessage("Password"),

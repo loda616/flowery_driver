@@ -5,4 +5,5 @@ class PageRouteName {
   static const String forgetPassword = "forgetPassword";
   static const String verifyOtp = "passwordVerification";
   static const String myProfile = "myProfile";
+  static const String restPassword = "restPassword";
 }
