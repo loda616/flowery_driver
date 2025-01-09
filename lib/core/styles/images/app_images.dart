@@ -12,4 +12,8 @@ class AppImages {
   static const String ordersIcon = "assets/icons/orders.svg";
   static const String homeIcon = "assets/icons/home_icon.svg";
   static const String personIcon = "assets/icons/person.svg";
+  static const String floweryRider = "assets/images/flowery_rider.jpg";
+  static const String locationIcon = "assets/icons/location_icon.png";
+
+
 }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/di/di.dart';
+import '../../../core/routes/page_route_name.dart';
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/styles/fonts/app_fonts.dart';
 import '../../../core/utils/functions/dialogs/app_dialogs.dart';
@@ -34,7 +35,7 @@ class _LogoutRowState extends State<LogoutRow> {
       bloc: viewModel,
       listener: (context, state) {
         if (state is LogoutSuccessState) {
-          //   Navigator.pushReplacementNamed(context, PageRouteName.homeLayout);
+             Navigator.pushReplacementNamed(context, PageRouteName.login);
         }
         if (state is LogoutErrorState) {
           AppDialogs.showErrorDialog(
