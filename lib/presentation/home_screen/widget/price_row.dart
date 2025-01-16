@@ -1,15 +1,18 @@
+import 'package:flowery_driver/core/routes/page_route_name.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/styles/fonts/app_fonts.dart';
+import '../../../generated/l10n.dart';
 
 class PriceRow extends StatelessWidget {
   const PriceRow({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -41,7 +44,9 @@ class PriceRow extends StatelessWidget {
               side: BorderSide(color: Colors.transparent, width: 1.w),
             ),
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, PageRouteName.orderDetails);
+          },
           child: Text("Accept", style: AppFonts.font14LightWhiteWeight500),
         ),
       ],

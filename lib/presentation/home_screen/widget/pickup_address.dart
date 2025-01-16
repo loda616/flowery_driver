@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/styles/colors/app_colors.dart';
 
-class PickupAddressCard extends StatelessWidget {
-  const PickupAddressCard({super.key});
+class PickupAddress extends StatelessWidget {
+  const PickupAddress({super.key});
 
   @override
   Widget build(BuildContext context) {

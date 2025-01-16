@@ -142,6 +142,8 @@
   "firstLegalName": "الاسم القانوني الأول",
   "secondLegalName": "الاسم القانوني الثاني",
   "country": "البلد",
+  "reject": "رفض",
+  "accept": "موافقة",
   "vehicle_number": "رقم المركبة",
   "vehicle_number_hint": "أدخل رقم المركبة",
   "vehicle_licence": "رخصة المركبة",

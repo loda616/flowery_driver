@@ -99,11 +99,26 @@ class AppFonts {
     color: AppColors.kGray,
     fontWeight: FontWeight.w400,
   );
+  static TextStyle font16GreenWeight600 = TextStyle(
+    fontSize: 16.sp,
+    color: AppColors.kGreen,
+    fontWeight: FontWeight.w600,
+  );
+  static TextStyle font16BlackWeight600 = TextStyle(
+    fontSize: 16.sp,
+    color: AppColors.kBlack,
+    fontWeight: FontWeight.w600,
+  );
 
   static TextStyle font16PinkWeight400 = TextStyle(
     fontSize: 16.sp,
     color: AppColors.kPink,
     fontWeight: FontWeight.w400,
+  );
+  static TextStyle font16PinkWeight500 = TextStyle(
+    fontSize: 16.sp,
+    color: AppColors.kPink,
+    fontWeight: FontWeight.w500,
   );
   static TextStyle font14PinkWeight500 = TextStyle(
     fontSize: 14.sp,
@@ -146,6 +161,11 @@ class AppFonts {
     color: AppColors.kGray,
     fontWeight: FontWeight.w400,
   );
+  static TextStyle font14GreyWeight500 = TextStyle(
+    fontSize: 14.sp,
+    color: AppColors.kGray,
+    fontWeight: FontWeight.w500,
+  );
 
   static TextStyle font14BlackWeight400 = TextStyle(
     fontSize: 14.sp,
@@ -167,6 +187,11 @@ class AppFonts {
   static TextStyle font13BlackWeight500 = TextStyle(
     fontSize: 13.sp,
     color: AppColors.kGray,
+    fontWeight: FontWeight.w500,
+  );
+  static TextStyle font13PinkWeight500 = TextStyle(
+    fontSize: 13.sp,
+    color: AppColors.kPink,
     fontWeight: FontWeight.w500,
   );
 

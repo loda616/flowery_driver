@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/styles/fonts/app_fonts.dart';
 import '../../../core/styles/images/app_images.dart';
 
-class UserAddressCard extends StatelessWidget {
-  const UserAddressCard({super.key});
+class OrderDetailsCard extends StatelessWidget {
+  const OrderDetailsCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,28 +29,41 @@ class UserAddressCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Align(child: Image.asset(AppImages.personPhoto)),
-            10.horizontalSpace,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Nour Mohamed",
-                  style: AppFonts.font16GreyWeight400,
-                ),
-                5.verticalSpace,
                 Row(
                   children: [
-                    Image.asset(AppImages.locationIcon),
-                    5.horizontalSpace,
-
-                    Text(
-                      "20th st,Sheikh Zayed,Giza",
-                      style: AppFonts.font13BlackWeight400,
+                    Align(child: Image.asset(AppImages.personPhoto)),
+                    10.horizontalSpace,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Red roses,15 pink Rose Bouquet",
+                          style: AppFonts.font16GreyWeight400,
+                        ),
+                        5.verticalSpace,
+                        Row(
+                          children: [
+                            Text(
+                              "EGP 600",
+                              style: AppFonts.font13BlackWeight400,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
-                ),
+                )
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("x1",style: AppFonts.font13PinkWeight500,)
               ],
             )
           ],

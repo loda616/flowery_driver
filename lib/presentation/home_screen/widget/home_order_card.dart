@@ -1,6 +1,6 @@
-import 'package:flowery_driver/presentation/home_screen/widget/pickup_address_card.dart';
+import 'package:flowery_driver/presentation/home_screen/widget/pickup_address.dart';
 import 'package:flowery_driver/presentation/home_screen/widget/price_row.dart';
-import 'package:flowery_driver/presentation/home_screen/widget/user_address_card.dart';
+import 'package:flowery_driver/presentation/home_screen/widget/user_address.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -52,7 +52,7 @@ class HomeOrderCard extends StatelessWidget {
                 ),
                 5.verticalSpace,
 
-                PickupAddressCard(),
+                PickupAddress(),
                 10.verticalSpace,
                 Text(
                   "User address",
@@ -60,7 +60,7 @@ class HomeOrderCard extends StatelessWidget {
                 ),
                 5.verticalSpace,
 
-                UserAddressCard(),
+                UserAddress(),
                 10.verticalSpace,
                 PriceRow(),
               ],

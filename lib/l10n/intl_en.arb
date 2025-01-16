@@ -153,5 +153,7 @@
   "id_image": "ID image",
   "id_image_hint": "Upload licence photo",
   "vehicle_type": "Vehicle type",
-  "vehicle_type_hint": "Enter vehicle type"
+  "vehicle_type_hint": "Enter vehicle type",
+  "reject": "Reject",
+  "accept": "Accept"
 }

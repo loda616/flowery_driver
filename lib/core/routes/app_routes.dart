@@ -2,6 +2,7 @@ import 'package:flowery_driver/presentation/auth/forgot_password/view/widgets/fo
 import 'package:flowery_driver/presentation/auth/forgot_password/view/widgets/reset_password_widget/reset_password_widget.dart';
 import 'package:flowery_driver/presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
 import 'package:flowery_driver/presentation/home_layout/view/home_layout_screen.dart';
+import 'package:flowery_driver/presentation/order_details/view/order_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -62,6 +63,8 @@ class AppRoutes {
 
       case PageRouteName.layout:
         return _handleMaterialPageRoute(widget: HomeLayoutScreen());
+        case PageRouteName.orderDetails:
+        return _handleMaterialPageRoute(widget: OrderDetailsScreen());
 
       default:
         return _handleMaterialPageRoute(widget: const Scaffold());
