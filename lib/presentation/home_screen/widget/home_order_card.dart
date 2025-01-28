@@ -62,7 +62,9 @@ class HomeOrderCard extends StatelessWidget {
 
                 UserAddress(),
                 10.verticalSpace,
-                PriceRow(),
+                PriceRow(
+                  orderId: "your_order_id_here", // Pass the actual order ID
+                ),
               ],
             ),
           ),

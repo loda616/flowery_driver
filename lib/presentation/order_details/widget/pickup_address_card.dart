@@ -1,6 +1,5 @@
 import 'package:flowery_driver/core/styles/fonts/app_fonts.dart';
 import 'package:flowery_driver/core/styles/images/app_images.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

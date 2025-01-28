@@ -7,7 +7,7 @@ import '../../../generated/l10n.dart';
 import 'custom_switch.dart';
 
 class HomeAppBar extends StatefulWidget {
-  HomeAppBar({super.key});
+  const HomeAppBar({super.key});
   @override
   State<HomeAppBar> createState() => _HomeAppBarState();
 }

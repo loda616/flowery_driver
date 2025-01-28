@@ -3,36 +3,40 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-enum OrderStatus { accepted, picked, outForDelivery, arrived, delivered }
+enum OrderStatus {
+  accepted,
+  picked,
+  outForDelivery,
+  arrived,
+  delivered
+}
 
 class OrderStatusIndicator extends StatelessWidget {
-  const OrderStatusIndicator({super.key, required this.currentStatus});
   final OrderStatus currentStatus;
+
+  const OrderStatusIndicator({
+    super.key,
+    required this.currentStatus
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
-        _buildStep(status: OrderStatus.accepted, isActive: currentStatus.index >= OrderStatus.accepted.index),
-        _buildStep(status: OrderStatus.accepted, isActive: currentStatus.index >= OrderStatus.arrived.index),
-        _buildStep(status: OrderStatus.accepted, isActive: currentStatus.index >= OrderStatus.arrived.index),
-        _buildStep(status: OrderStatus.accepted, isActive: currentStatus.index >= OrderStatus.arrived.index),
-        _buildStep(status: OrderStatus.accepted, isActive: currentStatus.index >= OrderStatus.arrived.index),
-      ],
+      children: OrderStatus.values.map((status) {
+        final isActive = status.index <= currentStatus.index;
+        return Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 5,
+                decoration: BoxDecoration(
+                  color: isActive ? AppColors.kGreen : AppColors.kLightGrey,
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+              ),
+            )
+        );
+      }).toList(),
     );
-  }
-  Widget _buildStep({required OrderStatus status, required bool isActive}) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-        //  margin: EdgeInsets.symmetric(horizontal: 2),
-          height: 5,
-          decoration: BoxDecoration(
-            color: isActive ? AppColors.kGreen : AppColors.kLightGrey,
-            borderRadius: BorderRadius.circular(10.r),
-        ),
-            ),
-      ));
   }
 }

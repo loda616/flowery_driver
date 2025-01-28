@@ -3,6 +3,7 @@ import 'package:flowery_driver/presentation/auth/forgot_password/view/widgets/re
 import 'package:flowery_driver/presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
 import 'package:flowery_driver/presentation/home_layout/view/home_layout_screen.dart';
 import 'package:flowery_driver/presentation/order_details/view/order_details_screen.dart';
+import 'package:flowery_driver/presentation/order_details/view_model/order_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -63,8 +64,17 @@ class AppRoutes {
 
       case PageRouteName.layout:
         return _handleMaterialPageRoute(widget: HomeLayoutScreen());
-        case PageRouteName.orderDetails:
-        return _handleMaterialPageRoute(widget: OrderDetailsScreen());
+
+      case PageRouteName.orderDetails:
+        final orderId = setting.arguments as String? ?? '';
+        return _handleMaterialPageRoute(
+          widget: BlocProvider<OrderDetailsCubit>(
+            create: (context) => getIt<OrderDetailsCubit>(),
+            child: OrderDetailsScreen(
+              orderId: orderId,
+            ),
+          ),
+        );
 
       default:
         return _handleMaterialPageRoute(widget: const Scaffold());

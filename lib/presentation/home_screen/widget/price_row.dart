@@ -1,14 +1,17 @@
 import 'package:flowery_driver/core/routes/page_route_name.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/styles/fonts/app_fonts.dart';
 import '../../../generated/l10n.dart';
 
 class PriceRow extends StatelessWidget {
-  const PriceRow({super.key});
+  final String orderId;
+
+  const PriceRow({
+    super.key,
+    required this.orderId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,11 @@ class PriceRow extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, PageRouteName.orderDetails);
+            Navigator.pushNamed(
+              context,
+              PageRouteName.orderDetails,
+              arguments: orderId,
+            );
           },
           child: Text("Accept", style: AppFonts.font14LightWhiteWeight500),
         ),

@@ -13,12 +13,17 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../../data/api/auth_api/auth_api_manager.dart' as _i515;
+import '../../data/api/order_details/order_details_api_manager.dart' as _i153;
 import '../../data/api/profile_api/profile_api_manager.dart' as _i592;
 import '../../data/api/vehicles_api/vehicles_api_manager.dart' as _i471;
 import '../../data/data_source/remote_data_source/auth/auth_remote_data_source.dart'
     as _i993;
 import '../../data/data_source/remote_data_source/auth/auth_remote_data_source_impl.dart'
     as _i568;
+import '../../data/data_source/remote_data_source/order_details/order_details_remote_data_source.dart'
+    as _i1008;
+import '../../data/data_source/remote_data_source/order_details/order_details_remote_data_source_impl.dart'
+    as _i276;
 import '../../data/data_source/remote_data_source/profile/profile_remote_data_source.dart'
     as _i53;
 import '../../data/data_source/remote_data_source/profile/profile_remote_data_source_impl.dart'
@@ -28,9 +33,15 @@ import '../../data/data_source/remote_data_source/vehicles/vehicles_remote_data_
 import '../../data/data_source/remote_data_source/vehicles/vehicles_remote_data_source_impl.dart'
     as _i885;
 import '../../data/repository/auth/auth_repository_impl.dart' as _i392;
+import '../../data/repository/oreder_details/order_details_repository_impl.dart'
+    as _i651;
+import '../../data/repository/oreder_details/start_order_use_case.dart'
+    as _i544;
 import '../../data/repository/profile/profile_repository_impl.dart' as _i181;
 import '../../data/repository/vehicles/vehicles_repository_impl.dart' as _i760;
 import '../../domain/repository/auth/auth_repository.dart' as _i912;
+import '../../domain/repository/order_details/order_details_repository.dart'
+    as _i188;
 import '../../domain/repository/profile/profile_repository.dart' as _i742;
 import '../../domain/repository/vehicles/vehicles_repository.dart' as _i266;
 import '../../domain/use_case/auth/apply_use_case.dart' as _i156;
@@ -38,6 +49,8 @@ import '../../domain/use_case/auth/forgot_password_use_case.dart' as _i120;
 import '../../domain/use_case/auth/login_use_case.dart' as _i408;
 import '../../domain/use_case/auth/reset_password_use_case.dart' as _i603;
 import '../../domain/use_case/auth/verify_reset_code_use_case.dart' as _i759;
+import '../../domain/use_case/order_details/update_order_state_use_case.dart'
+    as _i34;
 import '../../domain/use_case/profile/get_logged_driver_info_use_case.dart'
     as _i337;
 import '../../domain/use_case/profile/get_vehicle_info_use_case.dart' as _i897;
@@ -49,8 +62,9 @@ import '../../presentation/auth/apply/view_model/apply_view_model.dart'
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart'
     as _i351;
 import '../../presentation/auth/login/view_model/login_cubit.dart' as _i97;
+import '../../presentation/order_details/view_model/order_details_cubit.dart'
+    as _i535;
 import '../../presentation/profile/view_model/profile_view_model.dart' as _i671;
-import '../api/dio/dio_factory.dart' as _i763;
 import '../api/dio/dio_module.dart' as _i223;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -65,10 +79,11 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final dioModule = _$DioModule();
-    gh.factory<_i763.DioFactory>(() => _i763.DioFactory());
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio);
     gh.lazySingleton<_i515.AuthApiManager>(
         () => _i515.AuthApiManager(gh<_i361.Dio>()));
+    gh.lazySingleton<_i153.OrderDetailsApiManager>(
+        () => _i153.OrderDetailsApiManager(gh<_i361.Dio>()));
     gh.lazySingleton<_i592.ProfileApiManager>(
         () => _i592.ProfileApiManager(gh<_i361.Dio>()));
     gh.lazySingleton<_i471.VehiclesApiManager>(
@@ -84,12 +99,18 @@ extension GetItInjectableX on _i174.GetIt {
         _i568.AuthRemoteDataSourceImpl(apiManger: gh<_i515.AuthApiManager>()));
     gh.factory<_i912.AuthRepository>(
         () => _i392.AuthRepositoryImpl(gh<_i993.AuthRemoteDataSource>()));
+    gh.factory<_i1008.OrderDetailsRemoteDataSource>(() =>
+        _i276.OrderDetailsRemoteDataSourceImpl(
+            gh<_i153.OrderDetailsApiManager>()));
     gh.factory<_i603.ResetPasswordUseCase>(() =>
         _i603.ResetPasswordUseCase(authRepository: gh<_i912.AuthRepository>()));
     gh.factory<_i120.ForgotPasswordUseCase>(() =>
         _i120.ForgotPasswordUseCase(repository: gh<_i912.AuthRepository>()));
     gh.factory<_i759.VerifyResetCodeUseCase>(() =>
         _i759.VerifyResetCodeUseCase(repository: gh<_i912.AuthRepository>()));
+    gh.factory<_i188.OrderDetailsRepository>(() =>
+        _i651.OrderDetailsRepositoryImpl(
+            gh<_i1008.OrderDetailsRemoteDataSource>()));
     gh.factory<_i53.ProfileRemoteDataSource>(() =>
         _i466.ProfileRemoteDataSourceImpl(
             apiManger: gh<_i592.ProfileApiManager>()));
@@ -97,6 +118,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i408.LogInUseCase(gh<_i912.AuthRepository>()));
     gh.factory<_i742.ProfileRepository>(() => _i181.ProfileRepositoryImpl(
         profileRemoteDataSource: gh<_i53.ProfileRemoteDataSource>()));
+    gh.factory<_i544.StartOrderUseCase>(
+        () => _i544.StartOrderUseCase(gh<_i188.OrderDetailsRepository>()));
+    gh.factory<_i34.UpdateOrderStateUseCase>(
+        () => _i34.UpdateOrderStateUseCase(gh<_i188.OrderDetailsRepository>()));
+    gh.factory<_i535.OrderDetailsCubit>(() => _i535.OrderDetailsCubit(
+          gh<_i34.UpdateOrderStateUseCase>(),
+          gh<_i544.StartOrderUseCase>(),
+        ));
     gh.factory<_i156.SignUpUseCase>(
         () => _i156.SignUpUseCase(gh<_i912.AuthRepository>()));
     gh.factory<_i97.LoginViewModel>(

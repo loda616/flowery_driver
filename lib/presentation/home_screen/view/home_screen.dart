@@ -5,7 +5,7 @@ import '../widget/home_app_bar.dart';
 import '../widget/home_order_card.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -20,15 +20,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: AppColors.kWhite,
       appBar: AppBar(
-          forceMaterialTransparency: true,
-          automaticallyImplyLeading: false,
-          title: HomeAppBar(),
-        ),
-        body:ListView.builder(
-              itemCount: 2,
-              itemBuilder: (context, index) {
-                return HomeOrderCard();
-              }),
-        );
+        forceMaterialTransparency: true,
+        automaticallyImplyLeading: false,
+        title: HomeAppBar(),
+      ),
+      body: ListView.builder(
+          itemCount: 2,
+          itemBuilder: (context, index) {
+            return HomeOrderCard();
+          }),
+    );
   }
 }

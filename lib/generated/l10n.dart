@@ -1599,6 +1599,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Reject`
+  String get reject {
+    return Intl.message(
+      'Reject',
+      name: 'reject',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accept`
+  String get accept {
+    return Intl.message(
+      'Accept',
+      name: 'accept',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
