@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/styles/colors/app_colors.dart';
-import '../../../core/styles/fonts/app_fonts.dart';
-import '../../../generated/l10n.dart';
+import '../../../../core/styles/colors/app_colors.dart';
+import '../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../generated/l10n.dart';
 
 class PriceRow extends StatelessWidget {
   const PriceRow({super.key});

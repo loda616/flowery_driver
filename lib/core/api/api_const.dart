@@ -9,4 +9,8 @@ class ApiConstants {
   static const String getAllVehiclesType = "api/v1/vehicles";
   static const String getVehicleInfo = "api/v1/vehicles";
   static const String logout = "api/v1/drivers/logout";
+  static const String pendingOrders = "api/v1/orders/pending-orders";
+  static const String editProfile = "api/v1/drivers/editProfile";
+  static const String uploadPhoto = "api/v1/drivers/upload-photo";
+
 }

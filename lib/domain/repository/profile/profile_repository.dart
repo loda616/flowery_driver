@@ -6,4 +6,5 @@ abstract class ProfileRepository {
   Future<Result<DriverEntity?>> getLoggedDriverInfo();
   Future<Result<VehicleEntity?>> getVehicleInfo(String vehicleId);
   Future<Result<String?>> logout();
+
 }

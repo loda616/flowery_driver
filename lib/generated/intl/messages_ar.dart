@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutAs": MessageLookupByLibrary.simpleMessage("معلومات عنا"),
+        "accept": MessageLookupByLibrary.simpleMessage("موافقة"),
         "active": MessageLookupByLibrary.simpleMessage("نشط"),
         "addToCart": MessageLookupByLibrary.simpleMessage("أضف إلى السلة"),
         "addToCartText": MessageLookupByLibrary.simpleMessage("أضف إلى السلة"),
@@ -192,6 +193,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تم تحديث الملف الشخصي بنجاح"),
         "readyForDelivery":
             MessageLookupByLibrary.simpleMessage("جاهز للتسليم "),
+        "reject": MessageLookupByLibrary.simpleMessage("رفض"),
         "rememberMeText": MessageLookupByLibrary.simpleMessage("تذكرني"),
         "resendCodeSuccessState": MessageLookupByLibrary.simpleMessage(
             "يرجى التحقق من بريدك الإلكتروني، تم إعادة إرسال الرمز بنجاح."),
