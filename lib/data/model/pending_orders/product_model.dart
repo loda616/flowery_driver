@@ -75,7 +75,7 @@ class ProductModel {
   }
 
   Product? toEntity(){
-    Product(
+   return Product(
       id: id,
       title: title,
       slug: slug,
@@ -91,6 +91,5 @@ class ProductModel {
       sold: sold,
       occasion: occasion,
     );
-    return null;
   }
 }

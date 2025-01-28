@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../core/styles/images/app_images.dart';
+import '../../../../core/utils/const/custom_cached_network_image.dart';
 import '../../../../domain/entity/pending_orders/User.dart';
 
 class UserAddress extends StatelessWidget {
@@ -31,15 +32,12 @@ class UserAddress extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            /*********
             CustomCachedNetworkImage(
               imageUrl: user?.photo,
-              width: 70.w,
-              height: 70.h,
+              width: 55.w,
+              height: 55.h,
               shimmerRadiusValue: 0,
               fit: BoxFit.cover,),
-                *************/
-            Align(child: Image.asset(AppImages.personPhoto)),
             10.horizontalSpace,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

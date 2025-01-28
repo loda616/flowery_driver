@@ -11,7 +11,7 @@ class GetLoggedDriverInfoLoadingState extends ProfileState {}
 class GetLoggedDriverInfoSuccessState extends ProfileState {
   final DriverEntity? driver;
 
-  GetLoggedDriverInfoSuccessState({this.driver});
+  GetLoggedDriverInfoSuccessState({ this.driver});
 }
 
 class GetLoggedDriverInfoErrorState extends ProfileState {
@@ -44,4 +44,34 @@ class LogoutSuccessState extends ProfileState {
 class LogoutErrorState extends ProfileState {
   String? message;
   LogoutErrorState(this.message);
+}
+
+//Edit profile
+class EditProfileLoadingState extends ProfileState {}
+
+class EditProfileSuccessState extends ProfileState {
+  final DriverEntity? driver;
+
+  EditProfileSuccessState({this.driver});
+}
+
+class EditProfileErrorState extends ProfileState {
+  final String? errorMessage;
+
+  EditProfileErrorState({this.errorMessage});
+}
+
+//Upload photo
+class UploadPhotoLoadingState extends ProfileState {}
+
+class UploadPhotoSuccessState extends ProfileState {
+  final String? message;
+
+  UploadPhotoSuccessState({this.message});
+}
+
+class UploadPhotoErrorState extends ProfileState {
+  final String? errorMessage;
+
+  UploadPhotoErrorState({this.errorMessage});
 }

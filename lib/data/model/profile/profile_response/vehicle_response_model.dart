@@ -1,4 +1,5 @@
-import 'package:flowery_driver/data/model/profile/vehicle_model.dart';
+import 'package:flowery_driver/data/model/profile/profile_response/vehicle_model.dart';
+
 class VehicleResponseModel {
   VehicleResponseModel({
       this.message, 

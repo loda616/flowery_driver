@@ -12,9 +12,10 @@ import '../../../../domain/entity/pending_orders/Store.dart';
 import '../../../../domain/entity/pending_orders/User.dart';
 
 class HomeOrderCard extends StatelessWidget {
-  const HomeOrderCard({super.key, required this.user, required this.store});
+  const HomeOrderCard({super.key, required this.user, required this.store,required this.order});
   final User? user;
   final Store? store;
+  final OrderEntity? order;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +70,8 @@ class HomeOrderCard extends StatelessWidget {
                     user: user,
                   ),
                 10.verticalSpace,
-                PriceRow(),
+                PriceRow(
+                  totalPrice: order?.totalPrice.toString(),                ),
               ],
             ),
           ),

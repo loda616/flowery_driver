@@ -1,4 +1,5 @@
 import 'package:flowery_driver/core/routes/page_route_name.dart';
+import 'package:flowery_driver/domain/entity/pending_orders/order_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,8 +9,8 @@ import '../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../generated/l10n.dart';
 
 class PriceRow extends StatelessWidget {
-  const PriceRow({super.key});
-
+  const PriceRow({super.key,required this.totalPrice});
+final String? totalPrice;
   @override
   Widget build(BuildContext context) {
     final local = S.of(context);
@@ -17,7 +18,7 @@ class PriceRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          "EGP 3000",
+          "EGP $totalPrice ",
           style: AppFonts.font14BlackWeight600,
         ),
         ElevatedButton(

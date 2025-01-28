@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/styles/colors/app_colors.dart';
+import '../../../../core/utils/const/custom_cached_network_image.dart';
 import '../../../../domain/entity/pending_orders/Store.dart';
 
 class PickupAddress extends StatelessWidget {
@@ -32,15 +33,13 @@ class PickupAddress extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            /*********
                 CustomCachedNetworkImage(
-                imageUrl: user?.photo,
-                width: 70.w,
-                height: 70.h,
+                imageUrl: store?.image,
+                width: 55.w,
+                height: 55.h,
                 shimmerRadiusValue: 0,
                 fit: BoxFit.cover,),
-             *************/
-            Align(child: Image.asset(AppImages.personPhoto)),
+         //   Align(child: Image.asset(AppImages.personPhoto)),
             10.horizontalSpace,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

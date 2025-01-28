@@ -70,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         return HomeOrderCard(
                           user: order.user,
                           store: order.store,
+                          order: order,
                         );
                       }));
             }

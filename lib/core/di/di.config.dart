@@ -46,10 +46,12 @@ import '../../domain/use_case/auth/login_use_case.dart' as _i408;
 import '../../domain/use_case/auth/reset_password_use_case.dart' as _i603;
 import '../../domain/use_case/auth/verify_reset_code_use_case.dart' as _i759;
 import '../../domain/use_case/home/pending_orders_use_case.dart' as _i442;
+import '../../domain/use_case/profile/edit_profile_use_case.dart' as _i11;
 import '../../domain/use_case/profile/get_logged_driver_info_use_case.dart'
     as _i337;
 import '../../domain/use_case/profile/get_vehicle_info_use_case.dart' as _i897;
 import '../../domain/use_case/profile/logout_use_case.dart' as _i147;
+import '../../domain/use_case/profile/upload_photo_use_case.dart' as _i659;
 import '../../domain/use_case/vehicles/get_all_vehicles_use_case.dart'
     as _i1011;
 import '../../presentation/auth/apply/view_model/apply_view_model.dart'
@@ -79,12 +81,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio);
     gh.lazySingleton<_i515.AuthApiManager>(
         () => _i515.AuthApiManager(gh<_i361.Dio>()));
+    gh.lazySingleton<_i48.HomeApiManager>(
+        () => _i48.HomeApiManager(gh<_i361.Dio>()));
     gh.lazySingleton<_i592.ProfileApiManager>(
         () => _i592.ProfileApiManager(gh<_i361.Dio>()));
     gh.lazySingleton<_i471.VehiclesApiManager>(
         () => _i471.VehiclesApiManager(gh<_i361.Dio>()));
-    gh.lazySingleton<_i48.HomeApiManager>(
-        () => _i48.HomeApiManager(gh<_i361.Dio>()));
     gh.factory<_i497.HomeRemoteDataSource>(() =>
         _i567.ProfileRemoteDataSourceImpl(
             apiManger: gh<_i48.HomeApiManager>()));
@@ -122,10 +124,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i97.LoginViewModel(gh<_i408.LogInUseCase>()));
     gh.factory<_i147.LogoutUseCase>(
         () => _i147.LogoutUseCase(gh<_i742.ProfileRepository>()));
+    gh.factory<_i11.EditeProfileUseCase>(() => _i11.EditeProfileUseCase(
+        profileRepository: gh<_i742.ProfileRepository>()));
     gh.factory<_i337.GetLoggedDriverInfoUseCase>(() =>
         _i337.GetLoggedDriverInfoUseCase(
             profileRepository: gh<_i742.ProfileRepository>()));
     gh.factory<_i897.GetVehicleInfoUseCase>(() => _i897.GetVehicleInfoUseCase(
+        profileRepository: gh<_i742.ProfileRepository>()));
+    gh.factory<_i659.UploadPhotoUseCase>(() => _i659.UploadPhotoUseCase(
         profileRepository: gh<_i742.ProfileRepository>()));
     gh.factory<_i759.ApplyViewModel>(() => _i759.ApplyViewModel(
           gh<_i156.SignUpUseCase>(),
@@ -139,6 +145,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i726.HomeCubit>(
         () => _i726.HomeCubit(gh<_i442.GetPendingOrderUseCase>()));
     gh.factory<_i671.ProfileCubit>(() => _i671.ProfileCubit(
+          gh<_i11.EditeProfileUseCase>(),
+          gh<_i659.UploadPhotoUseCase>(),
           gh<_i337.GetLoggedDriverInfoUseCase>(),
           gh<_i147.LogoutUseCase>(),
           gh<_i897.GetVehicleInfoUseCase>(),

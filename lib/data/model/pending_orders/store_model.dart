@@ -31,14 +31,13 @@ class StoreModel {
     return map;
   }
   Store? toEntity(){
-    Store(
+  return  Store(
       name: name,
       image: image,
       address: address,
       phoneNumber: phoneNumber,
       latLong: latLong
     );
-    return null;
   }
 
 }

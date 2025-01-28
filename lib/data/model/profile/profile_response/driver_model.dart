@@ -1,4 +1,5 @@
-import '../../../domain/entity/profile/driver_entity.dart';
+
+import '../../../../domain/entity/profile/driver_entity.dart';
 
 class DriverModel {
   DriverModel({

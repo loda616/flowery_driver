@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flowery_driver/data/model/auth/requests/edite_profile_request_model.dart';
 import 'package:flowery_driver/domain/entity/profile/vehicle_entity.dart';
 import 'package:injectable/injectable.dart';
 
@@ -39,4 +42,15 @@ class ProfileRepositoryImpl implements ProfileRepository {
         return Fail(exception: result.exception);
     }
   }
+
+  @override
+  Future<Result<DriverEntity?>> editeProfile(EditeProfileRequestModel editeProfile) {
+    return profileRemoteDataSource.editProfile(editeProfile);
+  }
+
+  @override
+  Future<Result<String?>> uploadPhoto(File photo) {
+    return profileRemoteDataSource.uploadPhoto(photo);
+  }
+
 }

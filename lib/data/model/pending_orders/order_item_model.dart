@@ -32,11 +32,10 @@ class OrderItemModel {
     return map;
   }
   OrderItem? toEntity() {
-    OrderItem(
+   return OrderItem(
         price: price,
         quantity: quantity,
         id: id,
         product: product?.toEntity());
-    return null;
   }
 }

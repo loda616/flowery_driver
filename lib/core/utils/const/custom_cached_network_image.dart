@@ -31,19 +31,21 @@ class CustomCachedNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: imageUrl ?? "http://via.placeholder.com/350x150",
-      width: width,
-      height: height,
-      fit: fit,
-      placeholder: (context, url) =>
-      placeholder ??
-          ShimmerLoadingWidget(
-            width: shimmerWidth ?? 24,
-            height: shimmerHeight ?? 24,
-            borderRadius: shimmerRadiusValue,
-          ),
-      errorWidget: (context, url, error) => errorWidget ?? Icon(Icons.error),
+    return ClipOval(
+      child: CachedNetworkImage(
+        imageUrl: imageUrl ?? "http://via.placeholder.com/350x150",
+        width: width,
+        height: height,
+        fit: fit,
+        placeholder: (context, url) =>
+        placeholder ??
+            ShimmerLoadingWidget(
+              width: shimmerWidth ?? 24,
+              height: shimmerHeight ?? 24,
+              borderRadius: shimmerRadiusValue,
+            ),
+        errorWidget: (context, url, error) => errorWidget ?? Icon(Icons.error),
+      ),
     );
   }
 }

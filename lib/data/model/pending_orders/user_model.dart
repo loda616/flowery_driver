@@ -45,7 +45,7 @@ class UserModel {
   }
 
   User? toEntity() {
-    User(
+   return User(
         id: id,
         firstName: firstName,
         lastName: lastName,
@@ -54,6 +54,5 @@ class UserModel {
         photo: photo,
         phone: phone,
         passwordChangedAt: passwordChangedAt);
-    return null;
   }
 }

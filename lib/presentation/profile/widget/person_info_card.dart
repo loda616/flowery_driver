@@ -1,3 +1,4 @@
+import 'package:flowery_driver/core/routes/page_route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,10 +27,9 @@ class _PersonInfoCardState extends State<PersonInfoCard> {
           current is GetLoggedDriverInfoErrorState,
       builder: (context, state) {
         if (state is GetLoggedDriverInfoLoadingState) {
-          // WidgetsBinding.instance.addPostFrameCallback((_) {
-          //   if (mounted) AppDialogs.showLoading(context: context);
-          // });
-          return CircularProgressIndicator();
+          return CircularProgressIndicator(
+            color: AppColors.kPink,
+          );
         } else if (state is GetLoggedDriverInfoErrorState) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (mounted) {
@@ -40,68 +40,74 @@ class _PersonInfoCardState extends State<PersonInfoCard> {
             }
           });
         } else if (state is GetLoggedDriverInfoSuccessState) {
-          return Padding(
-            padding: EdgeInsets.all(8.0.sp),
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.r),
-                  border:
-                      Border.all(color: AppColors.kLighterGrey, width: 1.w)),
-              height: 130.h,
-              width: 343.w,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Align(
-                          alignment: Alignment.center,
-                          child: Image.network(
-                            state.driver?.photo ?? AppImages.personPhoto,
-                            loadingBuilder: (context, child, loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return CircularProgressIndicator(
-                                color: AppColors.kPink,
-                              );
-                            },
-                            errorBuilder: (context, error, stackTrace) {
-                              return Image.asset(AppImages.personPhoto);
-                            },
+          return InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, PageRouteName.editProfile);
+            },
+            child: Padding(
+              padding: EdgeInsets.all(8.0.sp),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.r),
+                    border:
+                        Border.all(color: AppColors.kLighterGrey, width: 1.w)),
+                height: 130.h,
+                width: 343.w,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: Image.network(
+                              state.driver?.photo ?? AppImages.personPhoto,
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return CircularProgressIndicator(
+                                  color: AppColors.kPink,
+                                );
+                              },
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.asset(AppImages.personPhoto);
+                              },
+                            ),
                           ),
-                        ),
-                        10.horizontalSpace,
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "${state.driver?.firstName ?? "john"} ${state.driver?.lastName ?? "deo"}",
-                              style: AppFonts.font18BlackWeight500,
-                            ),
-                            5.verticalSpace,
-                            Text(
-                              state.driver?.email ?? "johndeo@gmail.com",
-                              style: AppFonts.font16BlackWeight400,
-                            ),
-                            5.verticalSpace,
-                            Text(
-                              state.driver?.phone ?? "01063811038",
-                              style: AppFonts.font16BlackWeight400,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: AppColors.kGray,
+                          10.horizontalSpace,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "${state.driver?.firstName ?? "rawan"} ${state.driver?.lastName ?? "magdy"}",
+                                style: AppFonts.font18BlackWeight500,
+                              ),
+                              5.verticalSpace,
+                              Text(
+                                state.driver?.email ?? "rawan.magdy@gmail.com",
+                                style: AppFonts.font16BlackWeight400,
+                              ),
+                              5.verticalSpace,
+                              Text(
+                                state.driver?.phone ?? "01063811038",
+                                style: AppFonts.font16BlackWeight400,
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                      Align(
+                        alignment: Alignment.center,
+                        child: Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: AppColors.kGray,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
