@@ -22,7 +22,7 @@ class CustomGenderRow extends StatelessWidget {
             Row(
               children: [
                 Radio(
-                    value: "Female",
+                    value: "female",
                     groupValue: gender,
                     activeColor: Colors.pink,
                     onChanged: (value) {
@@ -33,7 +33,7 @@ class CustomGenderRow extends StatelessWidget {
                 Text("Female"),
                 16.horizontalSpace,
                 Radio(
-                    value: "Male",
+                    value: "male",
                     groupValue: gender,
                     activeColor: Colors.pink,
                     onChanged: (value) {

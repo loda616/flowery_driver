@@ -38,7 +38,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   Widget build(BuildContext context) {
     final local = S.of(context);
     return BlocListener<ProfileCubit, ProfileState>(
-        bloc: viewModel,
+        bloc: viewModel..getVehicleInfo(),
         listener: (context, state) {
           if (state is GetLoggedDriverInfoLoadingState) {
             AppDialogs.showLoading(context: context);

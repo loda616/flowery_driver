@@ -147,6 +147,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i671.ProfileCubit>(() => _i671.ProfileCubit(
           gh<_i11.EditeProfileUseCase>(),
           gh<_i659.UploadPhotoUseCase>(),
+          gh<_i1011.GetAllVehiclesUseCase>(),
           gh<_i337.GetLoggedDriverInfoUseCase>(),
           gh<_i147.LogoutUseCase>(),
           gh<_i897.GetVehicleInfoUseCase>(),

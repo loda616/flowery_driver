@@ -42,7 +42,7 @@ class _PersonInfoCardState extends State<PersonInfoCard> {
         } else if (state is GetLoggedDriverInfoSuccessState) {
           return InkWell(
             onTap: () {
-              Navigator.pushNamed(context, PageRouteName.editProfile);
+              Navigator.pushNamed(context, PageRouteName.editDriverInfo);
             },
             child: Padding(
               padding: EdgeInsets.all(8.0.sp),
@@ -76,20 +76,32 @@ class _PersonInfoCardState extends State<PersonInfoCard> {
                               },
                             ),
                           ),
-                          10.horizontalSpace,
+                          5.horizontalSpace,
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                "${state.driver?.firstName ?? "rawan"} ${state.driver?.lastName ?? "magdy"}",
-                                style: AppFonts.font18BlackWeight500,
+                              SizedBox(
+                                width: 185.w,
+                                child: Text(
+                                  "${state.driver?.firstName ?? "rawan"} ${state.driver?.lastName ?? "magdy"}",
+                                  style: AppFonts.font18BlackWeight500,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+
+                                ),
                               ),
                               5.verticalSpace,
-                              Text(
-                                state.driver?.email ?? "rawan.magdy@gmail.com",
-                                style: AppFonts.font16BlackWeight400,
+                              SizedBox(
+                                width: 185.w,
+                                child: Text(
+                                  state.driver?.email ?? "rawan.magdy@gmail.com",
+                                  style: AppFonts.font16BlackWeight400,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
                               ),
+
                               5.verticalSpace,
                               Text(
                                 state.driver?.phone ?? "01063811038",
@@ -97,17 +109,25 @@ class _PersonInfoCardState extends State<PersonInfoCard> {
                               ),
                             ],
                           ),
+                          InkWell(
+                            onTap: (){
+                              Navigator.pushNamed(context, PageRouteName.editDriverInfo);
+                            },
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: AppColors.kGray,
+                              ),
+                            ),
+                          ),
+
                         ],
                       ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: AppColors.kGray,
-                        ),
-                      ),
                     ],
+
                   ),
+
                 ),
               ),
             ),

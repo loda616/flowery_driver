@@ -70,7 +70,7 @@ class DriverModel {
   }
 
   DriverEntity? toEntity() {
-    DriverEntity(
+  return  DriverEntity(
         id: id,
         country: country,
         firstName: firstName,
@@ -84,6 +84,5 @@ class DriverModel {
         phone: phone,
         photo: photo,
         email: email);
-    return null;
   }
 }

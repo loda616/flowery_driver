@@ -8,5 +8,6 @@ class PageRouteName {
   static const String myProfile = "myProfile";
   static const String restPassword = "restPassword";
   static const String orderDetails = "orderDetails";
-  static const String editProfile = "editProfile";
+  static const String editDriverInfo = "editDriverInfo";
+  static const String editVehicleInfo = "editVehicleInfo";
 }

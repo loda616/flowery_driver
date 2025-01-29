@@ -52,5 +52,4 @@ class ProfileRepositoryImpl implements ProfileRepository {
   Future<Result<String?>> uploadPhoto(File photo) {
     return profileRemoteDataSource.uploadPhoto(photo);
   }
-
 }

@@ -1,3 +1,4 @@
+import 'package:flowery_driver/core/routes/page_route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,58 +27,60 @@ class _VehicleInfoCardState extends State<VehicleInfoCard> {
         if (state is GetVehicleInfoLoadingState) {
           return SizedBox();
         } else if (state is GetVehicleInfoSuccessState) {
-          return Padding(
-            padding: EdgeInsets.all(8.0.sp),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.r),
-                border: Border.all(color: AppColors.kLighterGrey, width: 1.w),
-              ),
-              height: 100.h,
-              width: 343.w,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Vehicle info",
-                          style: AppFonts.font18BlackWeight500,
-                        ),
-                        5.verticalSpace,
-                        Row(
-                          children: [
-                            Text(
-                              state.vehicle?.type ?? "car",
-                              style: AppFonts.font16BlackWeight400,
-                            ),
-                            10.horizontalSpace,
-                            Text(
-                              context
-                                      .read<ProfileCubit>()
-                                      .driver
-                                      ?.vehicleNumber ??
-                                  "123456",
-                              style: AppFonts.font16BlackWeight400.copyWith(
-                                color: AppColors.kGray,
+          return InkWell(
+            onTap: (){
+              Navigator.pushNamed(context, PageRouteName.editVehicleInfo);
+            },
+            child: Padding(
+              padding: EdgeInsets.all(8.0.sp),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.r),
+                  border: Border.all(color: AppColors.kLighterGrey, width: 1.w),
+                ),
+                height: 100.h,
+                width: 343.w,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Vehicle info",
+                            style: AppFonts.font18BlackWeight500,
+                          ),
+                          5.verticalSpace,
+                          Row(
+                            children: [
+                              Text(
+                                state.vehicle?.type ?? "Motor Cycle",
+                                style: AppFonts.font16BlackWeight400,
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const Align(
-                      alignment: Alignment.center,
-                      child: Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: AppColors.kGray,
+                              10.horizontalSpace,
+                              Text(
+                                context.read<ProfileCubit>().driver?.vehicleNumber ??
+                                    "123456",
+                                style: AppFonts.font16BlackWeight400.copyWith(
+                                  color: AppColors.kGray,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                      const Align(
+                        alignment: Alignment.center,
+                        child: Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: AppColors.kGray,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

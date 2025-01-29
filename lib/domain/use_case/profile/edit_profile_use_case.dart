@@ -11,4 +11,5 @@ class EditeProfileUseCase {
   EditeProfileUseCase({required this.profileRepository});
   Future<Result<DriverEntity?>> invoke(EditeProfileRequestModel editeProfile) async {
     return await profileRepository.editeProfile(editeProfile);
-}}
+  }
+}

@@ -47,7 +47,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     return await executeApiCall<DriverEntity?>(() async {
       var token = await _getToken();
       final editProfileModel = await apiManger.editProfile(token, editProfile);
-      return editProfileModel?.driver?.toEntity();
+      return editProfileModel?.toEntity();
     });
   }
 
@@ -56,7 +56,6 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   Future<Result<String?>> uploadPhoto(File photo) {
     return executeApiCall(() async {
       var token = await _getToken();
-
       var response = await apiManger.uploadPhoto(token, photo);
       return response;
     });

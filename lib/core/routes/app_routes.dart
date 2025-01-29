@@ -3,7 +3,7 @@ import 'package:flowery_driver/presentation/auth/forgot_password/view/widgets/re
 import 'package:flowery_driver/presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
 import 'package:flowery_driver/presentation/home_layout/view/home_layout_screen.dart';
 import 'package:flowery_driver/presentation/order_details/view/order_details_screen.dart';
-import 'package:flowery_driver/presentation/profile/view/edit_profile_screen.dart';
+import 'package:flowery_driver/presentation/profile/view_model/profile_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,6 +13,8 @@ import '../../presentation/auth/forgot_password/view/widgets/email_verification_
 import '../../presentation/auth/login/view/login_screen.dart';
 import '../../presentation/auth/login/view_model/login_cubit.dart';
 import '../../presentation/onboarding/presentation/onboarding_screen.dart';
+import '../../presentation/profile/view/edit_Vehicle_Info_screen.dart';
+import '../../presentation/profile/view/edit_driver_info_screen.dart';
 import '../di/di.dart';
 import 'page_route_name.dart';
 
@@ -64,8 +66,20 @@ class AppRoutes {
 
       case PageRouteName.layout:
         return _handleMaterialPageRoute(widget: HomeLayoutScreen());
-        case PageRouteName.editProfile:
-        return _handleMaterialPageRoute(widget: EditProfileScreen());
+
+      case PageRouteName.editDriverInfo:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+              create: (context) => getIt<ProfileCubit>(),
+              child: EditDriverInfoScreen(),
+            ));
+      case PageRouteName.editVehicleInfo:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<ProfileCubit>(),
+            child: const EditVehicleInfoScreen(),
+          ),
+        );
 
         case PageRouteName.orderDetails:
         return _handleMaterialPageRoute(widget: OrderDetailsScreen());

@@ -1,3 +1,5 @@
+import 'package:flowery_driver/domain/entity/vehicles/vehicle_type_entity.dart';
+
 import '../../../domain/entity/profile/driver_entity.dart';
 import '../../../domain/entity/profile/vehicle_entity.dart';
 
@@ -74,4 +76,13 @@ class UploadPhotoErrorState extends ProfileState {
   final String? errorMessage;
 
   UploadPhotoErrorState({this.errorMessage});
+}
+final class GetVehiclesTypeLoading extends ProfileState {}
+
+final class GetVehiclesTypeSuccess extends ProfileState {}
+
+final class GetVehiclesTypesError extends ProfileState {
+  final String? errorMessage;
+
+  GetVehiclesTypesError({this.errorMessage});
 }

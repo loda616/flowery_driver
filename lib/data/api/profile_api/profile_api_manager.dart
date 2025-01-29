@@ -38,7 +38,7 @@ abstract class ProfileApiManager {
   @PUT(ApiConstants.uploadPhoto)
   @MultiPart()
   Future<String?> uploadPhoto(
-      @Header("Authorization") String token,
-      @Part(name: "photo", contentType: "image/jpeg") File photo,
-      );
+    @Header("Authorization") String token,
+    @Part(name: "photo", contentType: "image/jpeg") File photo,
+  );
 }

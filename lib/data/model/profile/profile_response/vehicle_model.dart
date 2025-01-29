@@ -1,5 +1,4 @@
-
-import '../../../../domain/entity/profile/vehicle_entity.dart';
+import 'package:flowery_driver/domain/entity/profile/vehicle_entity.dart';
 
 class VehicleModel {
   VehicleModel({
@@ -38,11 +37,11 @@ class VehicleModel {
   }
 
   VehicleEntity? toEntity() {
-    VehicleEntity(
-      id: id,
-      type: type,
-      image: image,
-    );
-    return null;
+    return VehicleEntity(
+        id: id,
+        image: image,
+        type: type,
+        createdAt: createdAt,
+        updatedAt: updatedAt);
   }
 }

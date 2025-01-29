@@ -2,30 +2,29 @@ import 'package:flowery_driver/domain/entity/profile/driver_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/di/di.dart';
-import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/utils/functions/validators/validators.dart';
 import '../../../../../../core/utils/widget/custom_text_form_field.dart';
 import '../../../core/utils/widget/custom_button.dart';
 import '../view_model/profile_view_model.dart';
 import 'custom_gender_row.dart';
 
-class EditProfileForm extends StatefulWidget {
-  EditProfileForm({
+class EditDriverInfoForm extends StatefulWidget {
+  EditDriverInfoForm({
     super.key,
     required this.driver,
     this.gender,
     this.onGenderChanged,
   });
 
-  final DriverEntity driver;
   final ValueChanged<String>? onGenderChanged;
   final String? gender;
+  DriverEntity driver;
 
   @override
-  State<EditProfileForm> createState() => _EditProfileFormState();
+  State<EditDriverInfoForm> createState() => _EditDriverInfoFormState();
 }
 
-class _EditProfileFormState extends State<EditProfileForm> {
+class _EditDriverInfoFormState extends State<EditDriverInfoForm> {
   late ProfileCubit viewModel;
   bool hasChanges = false;
   String? gender;
@@ -35,6 +34,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
     super.initState();
     viewModel = getIt.get<ProfileCubit>();
     viewModel.getLoggedUserInfo();
+    gender = widget.gender;
   }
 
   @override
@@ -93,18 +93,11 @@ class _EditProfileFormState extends State<EditProfileForm> {
             24.verticalSpace,
             CustomTextFormField(
               onChanged: (value) => _checkChanges(widget.driver),
-              hintText: "***",
+              hintText: "***********",
               labelText: "",
-              controller: TextEditingController(text: "*************"),
+              controller: TextEditingController(text: "**********"),
               suffixIcon: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Text(
-                    "Change",
-                    style: AppFonts.font12PinkWeight600,
-                  ),
-                ),
               ),
             ),
             24.verticalSpace,

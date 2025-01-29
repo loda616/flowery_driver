@@ -1,4 +1,5 @@
 import 'package:flowery_driver/domain/entity/profile/vehicle_entity.dart';
+import 'package:flowery_driver/domain/entity/vehicles/vehicle_type_entity.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/api/api_result.dart';

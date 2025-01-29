@@ -1,25 +1,26 @@
+import 'package:flowery_driver/domain/entity/profile/vehicle_entity.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import '../../../../../../core/di/di.dart';
+
+import '../../../core/di/di.dart';
 import '../../../core/styles/images/app_images.dart';
 import '../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../generated/l10n.dart';
 import '../view_model/profile_states.dart';
 import '../view_model/profile_view_model.dart';
-import '../widget/edit_profile_widget.dart';
+import '../widget/edit_vehicle_Info_form.dart';
 
-class EditProfileScreen extends StatefulWidget {
-  static const String routeName = 'ProfileScreen';
-
-  const EditProfileScreen({super.key});
+class EditVehicleInfoScreen extends StatefulWidget {
+  const EditVehicleInfoScreen({super.key});
 
   @override
-  State<EditProfileScreen> createState() => _EditProfileScreenState();
+  State<EditVehicleInfoScreen> createState() => _EditDriverInfoScreenState();
 }
-class _EditProfileScreenState extends State<EditProfileScreen> {
+
+class _EditDriverInfoScreenState extends State<EditVehicleInfoScreen> {
   late ProfileCubit viewModel;
-  String? gender;
   bool hasChanges = false;
 
   @override
@@ -58,10 +59,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  EditProfileWidget(
-                    driver: state.driver,
-                    gender: state.driver?.gender,
-                    onGenderChanged: _onGenderChanged,
+                  EditVehicleInfoForm(
+                      driver: state.driver!,
+                      vehicle: state.driver?.vehicleType != null
+                          ? VehicleEntity(type: state.driver!.vehicleType!)
+                          : VehicleEntity()
                   )
                 ],
               ),
@@ -95,12 +97,5 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Center(
       child: Text(message),
     );
-  }
-
-  void _onGenderChanged(String newGender) {
-    setState(() {
-      gender = newGender;
-      hasChanges = true;
-    });
   }
 }
