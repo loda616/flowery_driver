@@ -1,4 +1,5 @@
 import 'package:flowery_driver/domain/entity/profile/vehicle_entity.dart';
+import '../../../domain/entity/profile/vehicle_entity.dart';
 
 class VehicleModel {
   VehicleModel({

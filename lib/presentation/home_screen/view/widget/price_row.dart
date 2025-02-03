@@ -3,12 +3,22 @@ import 'package:flowery_driver/domain/entity/pending_orders/order_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../core/styles/colors/app_colors.dart';
+import '../../../core/styles/fonts/app_fonts.dart';
+import '../../../generated/l10n.dart';
 
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../generated/l10n.dart';
 
 class PriceRow extends StatelessWidget {
+  final String orderId;
+
+  const PriceRow({
+    super.key,
+    required this.orderId,
+  });
+
   const PriceRow({super.key,required this.totalPrice});
 final String? totalPrice;
   @override
@@ -18,7 +28,7 @@ final String? totalPrice;
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          "EGP $totalPrice ",
+          "EGP 3000",
           style: AppFonts.font14BlackWeight600,
         ),
         ElevatedButton(
@@ -46,7 +56,11 @@ final String? totalPrice;
             ),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, PageRouteName.orderDetails);
+            Navigator.pushNamed(
+              context,
+              PageRouteName.orderDetails,
+              arguments: orderId,
+            );
           },
           child: Text("Accept", style: AppFonts.font14LightWhiteWeight500),
         ),

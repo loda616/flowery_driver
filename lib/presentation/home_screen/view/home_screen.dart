@@ -1,17 +1,11 @@
 import 'package:flowery_driver/core/styles/colors/app_colors.dart';
-import 'package:flowery_driver/presentation/home_screen/view/widget/home_app_bar.dart';
-import 'package:flowery_driver/presentation/home_screen/view/widget/home_order_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/di/di.dart';
-import '../../../core/utils/functions/dialogs/app_dialogs.dart';
-import '../../../domain/entity/pending_orders/order_entity.dart';
 import '../../../generated/l10n.dart';
 import '../view_model/home_states.dart';
 import '../view_model/home_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -19,14 +13,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isNotificationEnabled = true;
-  late HomeCubit viewModel;
-
-  @override
-  void initState() {
-    super.initState();
-    viewModel = getIt.get<HomeCubit>();
-    viewModel.getPendingOrders();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +61,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       }));
             }
             return Center(child: Text(local.noOrdersAvailable));
+          }),
+    );
+        forceMaterialTransparency: true,
+        automaticallyImplyLeading: false,
+        title: HomeAppBar(),
+      ),
+      body: ListView.builder(
+          itemCount: 2,
+          itemBuilder: (context, index) {
+            return HomeOrderCard();
           }),
     );
   }

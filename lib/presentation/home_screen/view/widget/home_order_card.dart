@@ -1,21 +1,14 @@
-import 'package:flowery_driver/domain/entity/pending_orders/order_entity.dart';
-import 'package:flowery_driver/presentation/home_screen/view/widget/pickup_address.dart';
-import 'package:flowery_driver/presentation/home_screen/view/widget/price_row.dart';
-import 'package:flowery_driver/presentation/home_screen/view/widget/user_address.dart';
+import 'package:flowery_driver/presentation/home_screen/widget/pickup_address.dart';
+import 'package:flowery_driver/presentation/home_screen/widget/price_row.dart';
+import 'package:flowery_driver/presentation/home_screen/widget/user_address.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../core/styles/colors/app_colors.dart';
-import '../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../domain/entity/pending_orders/Store.dart';
-import '../../../../domain/entity/pending_orders/User.dart';
+import '../../../core/styles/colors/app_colors.dart';
+import '../../../core/styles/fonts/app_fonts.dart';
 
 class HomeOrderCard extends StatelessWidget {
-  const HomeOrderCard({super.key, required this.user, required this.store,required this.order});
-  final User? user;
-  final Store? store;
-  final OrderEntity? order;
+  const HomeOrderCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +29,7 @@ class HomeOrderCard extends StatelessWidget {
             ],
             borderRadius: BorderRadius.circular(15.sp),
             border: Border.all(color: AppColors.kLighterGrey),
+
           ),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -57,9 +51,8 @@ class HomeOrderCard extends StatelessWidget {
                   style: AppFonts.font14GreyWeight400,
                 ),
                 5.verticalSpace,
-                PickupAddress(
-                  store: store,
-                ),
+
+                PickupAddress(),
                 10.verticalSpace,
                 Text(
                   "User address",
@@ -70,6 +63,9 @@ class HomeOrderCard extends StatelessWidget {
                     user: user,
                   ),
                 10.verticalSpace,
+                PriceRow(
+                  orderId: "your_order_id_here", // Pass the actual order ID
+                ),
                 PriceRow(
                   totalPrice: order?.totalPrice.toString(),                ),
               ],
