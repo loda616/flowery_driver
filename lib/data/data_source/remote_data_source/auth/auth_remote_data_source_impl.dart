@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
 import '../../../../core/api/execute_api_call.dart';
+import '../../../../domain/entity/auth/applu.dart';
 import '../../../api/auth_api/auth_api_manager.dart';
 import '../../../model/auth/requests/apply_request_model.dart';
 import '../../../model/auth/requests/login_request_model.dart';
@@ -25,9 +28,22 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<Result<String?>> apply(ApplyRequestBodyModel signUpRequestBody) {
-    return executeApiCall<String?>(() async {
-      final response = await apiManger.apply(signUpRequestBody);
+  Future<Result<String?>> apply(ApplyRequestEntity signUpRequestBody) {
+    return executeApiCall(() async {
+      final response = await apiManger.applyDriver(
+          signUpRequestBody.country!,
+          signUpRequestBody.firstName!,
+          signUpRequestBody.lastName!,
+          signUpRequestBody.vehicleType!,
+          signUpRequestBody.vehicleNumber!,
+          signUpRequestBody.vehicleLicense! ,
+          signUpRequestBody.nID!,
+          signUpRequestBody.nIDImg! ,
+          signUpRequestBody.email!,
+          signUpRequestBody.password!,
+          signUpRequestBody.rePassword!,
+          signUpRequestBody.gender!,
+          signUpRequestBody.phone!);
       return response.message;
     });
   }

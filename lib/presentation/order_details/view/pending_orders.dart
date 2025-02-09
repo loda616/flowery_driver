@@ -1,18 +1,32 @@
 import 'package:flowery_driver/core/styles/colors/app_colors.dart';
+import 'package:flowery_driver/presentation/order_details/view/pending_orders_widgets/home_app_bar.dart';
+import 'package:flowery_driver/presentation/order_details/view/pending_orders_widgets/home_order_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../core/di/di.dart';
+import '../../../core/utils/functions/dialogs/app_dialogs.dart';
+import '../../../domain/entity/pending_orders/order_entity.dart';
 import '../../../generated/l10n.dart';
-import '../view_model/home_states.dart';
-import '../view_model/home_view_model.dart';
+import '../view_model/order_details_cubit.dart';
+import '../view_model/order_details_state.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class PendingOrders extends StatefulWidget {
+  const PendingOrders({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<PendingOrders> createState() => _PendingOrdersState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _PendingOrdersState extends State<PendingOrders> {
   bool isNotificationEnabled = true;
+  late OrderDetailsCubit viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel = getIt.get<OrderDetailsCubit>();
+    viewModel.getPendingOrders();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
         automaticallyImplyLeading: false,
         title: HomeAppBar(),
       ),
-      body: BlocBuilder<HomeCubit, HomeState>(
+      body: BlocBuilder<OrderDetailsCubit, OrderState>(
           bloc: viewModel,
           builder: (BuildContext context, state) {
-            if (state is PendingOrderLoadingState) {
+            if (state is OrderStateLoading) {
               return Center(
                   child: CircularProgressIndicator(color: AppColors.kPink));
             }
@@ -38,7 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   errorMassage: state.errorMessage.toString(),
                 );
               });
-              return SizedBox.shrink();            }
+              return SizedBox.shrink();
+            }
             else if (state is PendingGetOrdersSuccessState) {
               List<OrderEntity?> orders = state.orders;
               return RefreshIndicator(
@@ -61,16 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       }));
             }
             return Center(child: Text(local.noOrdersAvailable));
-          }),
-    );
-        forceMaterialTransparency: true,
-        automaticallyImplyLeading: false,
-        title: HomeAppBar(),
-      ),
-      body: ListView.builder(
-          itemCount: 2,
-          itemBuilder: (context, index) {
-            return HomeOrderCard();
           }),
     );
   }

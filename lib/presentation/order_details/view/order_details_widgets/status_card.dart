@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class StatusCard extends StatelessWidget {
-  const StatusCard({super.key});
+  final String state, orderId,orderDate;
+  const StatusCard({super.key,required this.orderId,required this.state,required this.orderDate});
 
   @override
   Widget build(BuildContext context) {
@@ -19,23 +20,21 @@ class StatusCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text("Status: ",style: AppFonts.font16GreenWeight600,),
-                Text("Accepted",style: AppFonts.font16GreenWeight600),
+                Text("Status: $state",style: AppFonts.font16GreenWeight600,),
 
               ],
             ),
             5.verticalSpace,
             Row(
               children: [
-                Text("Order ID: ",style: AppFonts.font16BlackWeight600,),
-                Text("# 123456",style: AppFonts.font16BlackWeight600),
+                Text("Order ID: $orderId",style: AppFonts.font16BlackWeight600,),
 
               ],
             ),
             5.verticalSpace,
             Row(
               children: [
-                Text("wed,03 sep 2024, 11:00 AM ",style: AppFonts.font14GreyWeight500,),
+                Text("wed,03 feb 2025, 11:00 AM ",style: AppFonts.font14GreyWeight500,),
 
               ],
             ),

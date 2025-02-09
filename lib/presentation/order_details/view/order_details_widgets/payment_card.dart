@@ -1,12 +1,12 @@
-import 'package:flowery_driver/core/styles/fonts/app_fonts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/styles/colors/app_colors.dart';
+import '../../../../core/styles/colors/app_colors.dart';
+import '../../../../core/styles/fonts/app_fonts.dart';
 
-class TotalCard extends StatelessWidget {
-  const TotalCard({super.key});
-
+class PaymentCard extends StatelessWidget {
+  const PaymentCard({super.key,required this.paymentType});
+  final String paymentType;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,8 +30,8 @@ class TotalCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Total",style: AppFonts.font16BlackWeight500,),
-            Text("EGP 3000",style: AppFonts.font16BlackWeight500,),
+            Text("Payment method",style: AppFonts.font16BlackWeight500,),
+            Text(paymentType,style: AppFonts.font20BlackWeight500,),
 
           ],
         ),

@@ -1,43 +1,34 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../api_const.dart';
 import 'token_interceptor.dart';
 
+@injectable
 class DioFactory {
   DioFactory();
 
   Duration get _timeout => const Duration(seconds: 60);
 
+  @factoryMethod
   Dio createDio() {
-    Dio dio = Dio();
+    final dio = Dio();
     dio.options = BaseOptions(
       baseUrl: ApiConstants.baseUrl,
-      connectTimeout: _timeout,
-      receiveTimeout: _timeout,
-      validateStatus: (status) {
-        // Allow both successful responses and 4xx errors to be handled by the app
-        return status != null && status < 500;
-      },
+      connectTimeout: Duration(seconds: 180),
+      receiveTimeout: Duration(seconds: 180),
+      validateStatus: (status) =>
+      status != null ? status == 200 || status == 201 : false,
     );
-    addFreeDioInterceptors(dio);
-    return dio;
-  }
-
-  Dio createTokenDio() {
-    Dio dio = Dio();
-    dio.options = BaseOptions(
-      baseUrl: ApiConstants.baseUrl,
-      connectTimeout: _timeout,
-      receiveTimeout: _timeout,
-      validateStatus: (status) => status != null && status < 500,
-    );
-    addTokenDioInterceptors(dio);
-    return dio;
-  }
-
-  void addFreeDioInterceptors(Dio dio) {
     dio.interceptors.addAll([
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          options.baseUrl = ApiConstants.baseUrl;
+          return handler.next(options);
+        },
+      ),
+
       if (!kReleaseMode)
         PrettyDioLogger(
           requestBody: true,
@@ -45,9 +36,20 @@ class DioFactory {
           responseHeader: true,
         ),
     ]);
+
+    return dio;
   }
 
-  void addTokenDioInterceptors(Dio dio) {
+  @factoryMethod
+  Dio createTokenDio() {
+    Dio dio = Dio();
+    dio.options = BaseOptions(
+      baseUrl: ApiConstants.baseUrl,
+      connectTimeout: _timeout,
+      receiveTimeout: _timeout,
+      validateStatus: (status) => status != null ? status <= 500 : false,
+    );
+
     dio.interceptors.addAll([
       TokenInterceptor(),
       if (!kReleaseMode)
@@ -57,5 +59,7 @@ class DioFactory {
           responseHeader: true,
         ),
     ]);
+
+    return dio;
   }
 }

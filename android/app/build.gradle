@@ -1,8 +1,9 @@
 plugins {
     id "com.android.application"
     id "kotlin-android"
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
-    id "dev.flutter.flutter-gradle-plugin"
+    id "dev.flutter.flutter-gradle-plugin" // Flutter plugin
+    id "com.google.gms.google-services" // Google services plugin (must be at the bottom)
+
 }
 
 android {
@@ -41,4 +42,9 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:32.2.0') // Use Firebase BOM for version management
+    implementation 'com.google.firebase:firebase-messaging' // Firebase messaging dependency
 }

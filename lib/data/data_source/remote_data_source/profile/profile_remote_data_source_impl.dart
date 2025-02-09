@@ -5,7 +5,6 @@ import '../../../../../core/api/api_result.dart';
 import '../../../../../core/api/execute_api_call.dart';
 import '../../../../../core/local/token_manger.dart';
 import '../../../api/profile_api/profile_api_manager.dart';
-import '../../../model/auth/requests/edite_profile_request_model.dart';
 import '../../../model/profile/profile_response/driver_model.dart';
 import '../../../model/profile/profile_response/vehicle_model.dart';
 import 'profile_remote_data_source.dart';
@@ -42,15 +41,13 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   }
 
   @override
-  Future<Result<DriverEntity?>> editProfile(
-      EditeProfileRequestModel editProfile) async {
+  Future<Result<DriverEntity?>> editProfile(Map<String, dynamic> body) async {
     return await executeApiCall<DriverEntity?>(() async {
       var token = await _getToken();
-      final editProfileModel = await apiManger.editProfile(token, editProfile);
+      final editProfileModel = await apiManger.editProfile(token, body);
       return editProfileModel?.toEntity();
     });
   }
-
 
   @override
   Future<Result<String?>> uploadPhoto(File photo) {
@@ -58,6 +55,15 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       var token = await _getToken();
       var response = await apiManger.uploadPhoto(token, photo);
       return response;
+    });
+  }
+
+  @override
+  Future<Result<List<VehicleModel?>>> getAllVehicles() {
+    return executeApiCall<List<VehicleModel?>>(() async {
+      var token = await _getToken();
+      var vehicleModel = await apiManger.getAllVehicles(token);
+      return vehicleModel?.vehicles ?? [];
     });
   }
 

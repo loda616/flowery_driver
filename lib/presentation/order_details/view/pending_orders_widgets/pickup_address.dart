@@ -3,7 +3,6 @@ import 'package:flowery_driver/core/styles/images/app_images.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/utils/const/custom_cached_network_image.dart';
 import '../../../../domain/entity/pending_orders/Store.dart';
@@ -39,7 +38,6 @@ class PickupAddress extends StatelessWidget {
                 height: 55.h,
                 shimmerRadiusValue: 0,
                 fit: BoxFit.cover,),
-         //   Align(child: Image.asset(AppImages.personPhoto)),
             10.horizontalSpace,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

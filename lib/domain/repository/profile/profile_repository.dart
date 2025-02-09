@@ -8,8 +8,9 @@ import '../../entity/profile/vehicle_entity.dart';
 abstract class ProfileRepository {
   Future<Result<DriverEntity?>> getLoggedDriverInfo();
   Future<Result<VehicleEntity?>> getVehicleInfo(String vehicleId);
+  Future<Result<List<VehicleEntity?>>> getAllVehicle();
   Future<Result<String?>> logout();
-  Future<Result<DriverEntity?>> editeProfile(EditeProfileRequestModel editeProfile);
+  Future<Result<DriverEntity?>> editeProfile(Map<String, dynamic> body);
   Future<Result<String?>> uploadPhoto(File photo);
 
 

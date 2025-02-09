@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../core/di/di.dart';
-import '../../home_screen/view/home_screen.dart';
+import '../../order_details/view/pending_orders.dart';
 import '../../profile/view/my_profile_screen.dart';
 import '../../profile/view_model/profile_view_model.dart';
 import 'widgets/bottom_navigation_bar.dart';
@@ -22,7 +21,7 @@ class _HomeLayoutScreenState extends State<HomeLayoutScreen> {
   initState() {
     super.initState();
     _screens = [
-      HomeScreen(),
+      PendingOrders(),
       Scaffold(
         body: Text('Home'),
       ),

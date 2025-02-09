@@ -62,18 +62,22 @@ class _PersonInfoCardState extends State<PersonInfoCard> {
                         children: [
                           Align(
                             alignment: Alignment.center,
-                            child: Image.network(
-                              state.driver?.photo ?? AppImages.personPhoto,
-                              loadingBuilder:
-                                  (context, child, loadingProgress) {
-                                if (loadingProgress == null) return child;
-                                return CircularProgressIndicator(
-                                  color: AppColors.kPink,
-                                );
-                              },
-                              errorBuilder: (context, error, stackTrace) {
-                                return Image.asset(AppImages.personPhoto);
-                              },
+                            child: ClipOval(
+                              child: Image.network(
+                                state.driver?.photo ?? AppImages.personPhoto,
+                                fit: BoxFit.cover,
+                                height: 100.h,
+                                width: 100.w,
+                                errorBuilder: (_, __, ___) => Image.asset(AppImages.personPhoto),
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return CircularProgressIndicator(
+                                    color: AppColors.kPink,
+                                  );
+                                },
+                                                        
+                              ),
                             ),
                           ),
                           5.horizontalSpace,

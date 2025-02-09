@@ -29,11 +29,24 @@ class CustomCachedNetworkImage extends StatelessWidget {
     this.errorWidget,
   });
 
+  String fixImageUrl(String? url) {
+    if (url == null || url.isEmpty) {
+      return "https://flower.elevateegy.com/uploads/default-profile.png";
+    }
+    url = url.replaceAll("https://flower.elevateegy.com/uploads/", "");
+    if (!url.startsWith("http")) {
+      return "https://flower.elevateegy.com/uploads/$url";
+    }
+
+    return url;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return ClipOval(
       child: CachedNetworkImage(
-        imageUrl: imageUrl ?? "http://via.placeholder.com/350x150",
+        imageUrl: fixImageUrl(imageUrl),
         width: width,
         height: height,
         fit: fit,

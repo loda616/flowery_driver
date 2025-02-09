@@ -1,25 +1,47 @@
 import 'package:equatable/equatable.dart';
 
-abstract class OrderDetailsState extends Equatable {
-  const OrderDetailsState();
+import '../../../domain/entity/order_details/update_order_entity.dart';
+import '../../../domain/entity/pending_orders/order_entity.dart';
 
-  @override
-  List<Object?> get props => [];
+sealed class OrderState {}
+class OrderStateInitial extends OrderState {}
+
+class OrderStateLoading extends OrderState {}
+
+//getAllPendingOrders
+final class PendingGetOrdersSuccessState extends OrderState {
+  final List<OrderEntity?> orders;
+
+  PendingGetOrdersSuccessState({required this.orders});
 }
 
-class OrderDetailsInitial extends OrderDetailsState {}
+final class PendingGetOrdersErrorState extends OrderState {
+  final String? errorMessage;
 
-class OrderDetailsLoading extends OrderDetailsState {}
-
-class OrderDetailsError extends OrderDetailsState {
-  final String message;
-
-  const OrderDetailsError(this.message);
-
-  @override
-  List<Object?> get props => [message];
+  PendingGetOrdersErrorState({this.errorMessage});
 }
 
-class OrderStateUpdated extends OrderDetailsState {}
 
-class OrderStarted extends OrderDetailsState {}
+class OrderDetailsSuccess extends OrderState {
+  final UpdateOrdersEntity? ordersEntity;
+   OrderDetailsSuccess({required this.ordersEntity});
+}
+
+class OrderDetailsError extends OrderState {
+  final String errorMessage;
+
+  OrderDetailsError({required this.errorMessage});
+
+}
+
+class StartOrderSuccess extends OrderState {
+  final UpdateOrdersEntity? ordersEntity;
+  StartOrderSuccess({required this.ordersEntity});
+
+}
+
+class StartOrderError extends OrderState {
+  final String errorMessage;
+
+  StartOrderError({required this.errorMessage});
+}

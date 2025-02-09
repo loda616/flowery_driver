@@ -1,11 +1,12 @@
-import 'package:flowery_driver/domain/entity/profile/vehicle_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/utils/widget/custom_button.dart';
 import '../../../core/utils/widget/custom_text_form_field.dart';
 import '../../../domain/entity/profile/driver_entity.dart';
+import '../../../domain/entity/vehicles/vehicle_type_entity.dart';
 import '../view_model/profile_states.dart';
 import '../view_model/profile_view_model.dart';
 
@@ -19,7 +20,7 @@ class EditVehicleInfoForm extends StatefulWidget {
 
   final ValueChanged<String>? onGenderChanged;
   DriverEntity driver;
-  VehicleEntity vehicle;
+  List<VehicleType> vehicle;
 
   @override
   State<EditVehicleInfoForm> createState() => _EditDriverInfoFormState();
@@ -36,6 +37,8 @@ class _EditDriverInfoFormState extends State<EditVehicleInfoForm> {
     viewModel = context.read<ProfileCubit>();
     selectedVehicleTypeId = widget.driver.vehicleType;
     viewModel.getAllVehicles();
+    viewModel.vehicleNumberController.text = widget.driver.vehicleNumber ?? '';
+    viewModel.vehicleLicenseController.text = widget.driver.vehicleLicense ?? '';
   }
 
   @override
@@ -47,7 +50,7 @@ class _EditDriverInfoFormState extends State<EditVehicleInfoForm> {
         child: Column(
           children: [
             BlocBuilder<ProfileCubit, ProfileState>(
-              bloc: viewModel..getLoggedUserInfo(),
+              bloc: viewModel,
               buildWhen: (previous, current) {
                 return current is GetVehiclesTypeLoading ||
                     current is GetVehiclesTypeSuccess ||
@@ -55,19 +58,21 @@ class _EditDriverInfoFormState extends State<EditVehicleInfoForm> {
               },
               builder: (context, state) {
                 if (state is GetVehiclesTypeLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return  Center(child: CircularProgressIndicator(
+                    backgroundColor: AppColors.kPink,
+                  ));
                 }
                 if (state is GetVehiclesTypesError) {
-                  return Text(state.errorMessage??"");
+                  return Text(state.errorMessage ?? "");
                 }
 
-                final isSelectedValueValid = viewModel.vehicles
-                    .any((vehicle) => vehicle.id == selectedVehicleTypeId);
-
+                if (viewModel.vehicles.isEmpty) {
+                  return const Text("No vehicle types available.");
+                }
                 return DropdownButtonFormField<String>(
-                  value: isSelectedValueValid ? selectedVehicleTypeId : null,
+                  value: viewModel.vehicles.any((vehicle) => vehicle.id == selectedVehicleTypeId)
+                      ? selectedVehicleTypeId
+                      : viewModel.vehicles.first.id,
                   items: viewModel.vehicles.map((vehicle) {
                     return DropdownMenuItem<String>(
                       value: vehicle.id,
@@ -78,7 +83,18 @@ class _EditDriverInfoFormState extends State<EditVehicleInfoForm> {
                     labelText: 'Vehicle Type',
                     hintText: 'Select Vehicle Type',
                   ),
-                  onChanged: (value)  => _checkVehicleChanges(widget.vehicle)
+                  onChanged: (value) {
+                    setState(() {
+                      selectedVehicleTypeId = value;
+                      _checkDriverChanges(widget.driver);
+                    });
+                  },
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Please select a vehicle type';
+                    }
+                    return null;
+                  },
                 );
               },
             ),
@@ -87,17 +103,17 @@ class _EditDriverInfoFormState extends State<EditVehicleInfoForm> {
               controller: viewModel.vehicleNumberController,
               hintText: widget.driver.vehicleNumber ?? '',
               labelText: "Vehicle Number",
-              onChanged: (value) => _checkDriverChanges(widget.driver),
+              onChanged: (value) {
+                _checkDriverChanges(widget.driver);
+              },
             ),
+
             24.verticalSpace,
             CustomTextFormField(
-              onChanged: (value) => _checkDriverChanges(widget.driver),
-              hintText: "photo_1234567",
+              controller: viewModel.vehicleLicenseController,
+              hintText: widget.driver.vehicleLicense ?? '',
               labelText: "Vehicle License",
-              controller: TextEditingController(),
-              suffixIcon: Padding(
-                padding: const EdgeInsets.all(16.0),
-              ),
+              onChanged: (value) => _checkDriverChanges(widget.driver),
             ),
             50.verticalSpace,
 
@@ -105,13 +121,15 @@ class _EditDriverInfoFormState extends State<EditVehicleInfoForm> {
               onPressed: hasChanges
                   ? () async {
                 if (viewModel.formKey.currentState!.validate()) {
-                  if (selectedVehicleTypeId != widget.driver.vehicleType) {
-                    await viewModel.updateVehicleType(selectedVehicleTypeId!);
-                  }
-                  await viewModel.editeProfile();
+                  await viewModel.updateVehicleInfo(
+                    viewModel.vehicleNumberController.text,
+                    viewModel.vehicleLicenseController.text,
+                    selectedVehicleTypeId ?? widget.driver.vehicleType!,
+                  );
                   setState(() {
                     widget.driver.vehicleNumber = viewModel.vehicleNumberController.text;
-                    widget.vehicle.type = viewModel.vehicleTypeController.text;
+                    widget.driver.vehicleLicense = viewModel.vehicleLicenseController.text;
+                    widget.driver.vehicleType = selectedVehicleTypeId;
                     hasChanges = false;
                   });
                 }
@@ -131,16 +149,11 @@ class _EditDriverInfoFormState extends State<EditVehicleInfoForm> {
     );
   }
 
-  void _checkDriverChanges(DriverEntity driver ) {
+  void _checkDriverChanges(DriverEntity driver) {
     setState(() {
       hasChanges = viewModel.vehicleNumberController.text != driver.vehicleNumber ||
-          selectedVehicleTypeId != driver.vehicleType ||
-      viewModel.vehicleTypeController.text !=driver.vehicleType;
-    });
-  }
-  void _checkVehicleChanges( VehicleEntity vehicle ) {
-    setState(() {
-      hasChanges = viewModel.vehicleTypeController.text !=vehicle.type;
+          viewModel.vehicleLicenseController.text != driver.vehicleLicense ||
+          selectedVehicleTypeId != driver.vehicleType;
     });
   }
 }

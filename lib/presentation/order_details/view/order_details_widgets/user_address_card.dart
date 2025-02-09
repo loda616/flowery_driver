@@ -1,17 +1,20 @@
-import 'package:flowery_driver/core/styles/fonts/app_fonts.dart';
-import 'package:flowery_driver/core/styles/images/app_images.dart';
+import 'package:flowery_driver/presentation/order_details/view/order_details_widgets/pickup_address_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/styles/colors/app_colors.dart';
+import '../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../core/styles/images/app_images.dart';
+import '../../../../core/utils/const/custom_cached_network_image.dart';
+import '../../../../domain/entity/pending_orders/User.dart';
 
-import '../../../core/styles/colors/app_colors.dart';
-
-class PickupAddressCard extends StatelessWidget {
-  const PickupAddressCard({super.key});
+class UserAddressCard extends StatelessWidget {
+  const UserAddressCard({super.key, required this.user});
+  final User? user;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.h,
+      height: 90.h,
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.kWhite,
@@ -27,7 +30,7 @@ class PickupAddressCard extends StatelessWidget {
         border: Border.all(color: AppColors.kLighterGrey),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -36,13 +39,19 @@ class PickupAddressCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Align(child: Image.asset(AppImages.personPhoto)),
+                    CustomCachedNetworkImage(
+                      imageUrl: user?.photo,
+                      width: 55.w,
+                      height: 55.h,
+                      shimmerRadiusValue: 0,
+                      fit: BoxFit.cover,
+                    ),
                     10.horizontalSpace,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Flowery store",
+                          "${user?.firstName ?? "Unknown"} ${user?.lastName ?? "User"}",
                           style: AppFonts.font16GreyWeight400,
                         ),
                         5.verticalSpace,
@@ -50,10 +59,7 @@ class PickupAddressCard extends StatelessWidget {
                           children: [
                             Image.asset(AppImages.locationIcon),
                             5.horizontalSpace,
-                            Text(
-                              "20th st,Sheikh Zayed,Giza",
-                              style: AppFonts.font13BlackWeight400,
-                            ),
+                            Text(user?.phone ?? "No phone number", style: AppFonts.font13BlackWeight400,),
                           ],
                         ),
                       ],
@@ -66,18 +72,18 @@ class PickupAddressCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Icon(
-                      Icons.phone,
-                      color: AppColors.kPink,
-                    ),
-                    5.horizontalSpace,
-                    Icon(
-                      Icons.message,
-                      color: AppColors.kPink,
-                    ),
+                    GestureDetector(
+                      onTap: () => callPhone(user?.phone ?? ""),
+                      child: Icon(Icons.phone, color: AppColors.kPink, size: 22),
+                    ),                    15.horizontalSpace,
+                    IconButton(
+                      icon: Icon(Icons.message, color: AppColors.kPink, size: 22),
+                      onPressed: () => openWhatsApp(user?.phone ?? ""),
+                    )
                   ],
-                )
+                ),
               ],
             )
           ],

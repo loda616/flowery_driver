@@ -1,4 +1,8 @@
+import '../../../../core/api/api_result.dart';
+import '../../../model/order/UpdateOrderDetailsRequestBody.dart';
+import '../../../model/order/update_order_model.dart';
+
 abstract class OrderDetailsRemoteDataSource {
-  Future<void> updateOrderState(String orderId, String state);
-  Future<void> startOrder(String orderId);
+  Future<Result<UpdateOrdersModel?>> updateOrderState( String orderId, UpdateOrderDetailsRequestBody state);
+  Future<Result<UpdateOrdersModel?>> startOrder( String orderId);
 }

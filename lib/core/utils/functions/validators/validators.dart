@@ -60,19 +60,33 @@ class Validators {
     if (_isEmpty(value)) {
       return 'Phone Number is required';
     }
-
+    value = value!.replaceAll(RegExp(r'[^\d+]'), '');
     var regex = RegExp(
       r"^\+201[0125]\d{8}$",
     );
+    if (!regex.hasMatch(value)) {
+      return "Must be 11 digits starting with (+20)";
+    }
+    return null;
+  }
+  static bool _isEmpty(String? value) {
+    return value == null || value.trim().isEmpty;
+  }
+
+  static String? validateNationalId(String? value) {
+    if (_isEmpty(value)) {
+      return 'National ID is required';
+    }
+    var regex = RegExp(r'^\d{14}$');
 
     if (!regex.hasMatch(value!)) {
-      return "Must be 11 digits starting with (+20)";
+      return "National ID must be 14 digits";
+    }
+    String firstTwoDigits = value.substring(0, 2);
+    if (int.parse(firstTwoDigits) < 01 || int.parse(firstTwoDigits) > 31) {
+      return "Invalid birth date in ID";
     }
 
     return null;
-  }
-
-  static bool _isEmpty(String? value) {
-    return value == null || value.trim().isEmpty;
   }
 }

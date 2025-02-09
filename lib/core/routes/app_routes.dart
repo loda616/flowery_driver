@@ -5,15 +5,18 @@ import 'package:flowery_driver/presentation/home_layout/view/home_layout_screen.
 import 'package:flowery_driver/presentation/order_details/view/order_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import '../../data/model/order/UpdateOrderDetailsRequestBody.dart';
 import '../../presentation/auth/apply/view/apply_screen.dart';
 import '../../presentation/auth/apply/view_model/apply_view_model.dart';
 import '../../presentation/auth/forgot_password/view/widgets/email_verification_widget/email_verification.dart';
 import '../../presentation/auth/login/view/login_screen.dart';
 import '../../presentation/auth/login/view_model/login_cubit.dart';
 import '../../presentation/onboarding/presentation/onboarding_screen.dart';
+import '../../presentation/order_details/view_model/order_details_cubit.dart';
 import '../../presentation/profile/view/edit_Vehicle_Info_screen.dart';
 import '../../presentation/profile/view/edit_driver_info_screen.dart';
+import '../../presentation/profile/view_model/profile_view_model.dart';
+import '../../splash/splash_screen.dart';
 import '../di/di.dart';
 import 'page_route_name.dart';
 
@@ -22,6 +25,8 @@ class AppRoutes {
     switch (setting.name) {
       case PageRouteName.onBoarding:
         return _handleMaterialPageRoute(widget: OnboardingScreen());
+      case PageRouteName.splash:
+        return _handleMaterialPageRoute(widget: const SplashScreen());
 
       case PageRouteName.login:
         return _handleMaterialPageRoute(
@@ -67,22 +72,20 @@ class AppRoutes {
         return _handleMaterialPageRoute(widget: HomeLayoutScreen());
 
       case PageRouteName.orderDetails:
-        final orderId = setting.arguments as String? ?? '';
-        return _handleMaterialPageRoute(
-          widget: BlocProvider<OrderDetailsCubit>(
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
             create: (context) => getIt<OrderDetailsCubit>(),
-            child: OrderDetailsScreen(
-              orderId: orderId,
-            ),
+            child: OrderDetailsScreen(),
           ),
+          settings: setting,
         );
 
       case PageRouteName.editDriverInfo:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-              create: (context) => getIt<ProfileCubit>(),
-              child: EditDriverInfoScreen(),
-            ));
+                  create: (context) => getIt<ProfileCubit>(),
+                  child: EditDriverInfoScreen(),
+                ));
       case PageRouteName.editVehicleInfo:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -90,9 +93,6 @@ class AppRoutes {
             child: const EditVehicleInfoScreen(),
           ),
         );
-
-        case PageRouteName.orderDetails:
-        return _handleMaterialPageRoute(widget: OrderDetailsScreen());
 
       default:
         return _handleMaterialPageRoute(widget: const Scaffold());

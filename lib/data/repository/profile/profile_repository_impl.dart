@@ -44,12 +44,24 @@ class ProfileRepositoryImpl implements ProfileRepository {
   }
 
   @override
-  Future<Result<DriverEntity?>> editeProfile(EditeProfileRequestModel editeProfile) {
-    return profileRemoteDataSource.editProfile(editeProfile);
+  Future<Result<DriverEntity?>> editeProfile( Map<String, dynamic> body) {
+    return profileRemoteDataSource.editProfile(body);
   }
 
   @override
   Future<Result<String?>> uploadPhoto(File photo) {
     return profileRemoteDataSource.uploadPhoto(photo);
+  }
+
+  @override
+  Future<Result<List<VehicleEntity?>>> getAllVehicle() async {
+    final result = await profileRemoteDataSource.getAllVehicles();
+    switch (result) {
+      case Success():
+        final data =result.data?.map((model) => model?.toEntity()).toList();
+        return Success(data: data);
+      case Fail():
+        return Fail(exception: result.exception);
+    }
   }
 }

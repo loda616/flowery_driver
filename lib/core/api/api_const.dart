@@ -12,5 +12,7 @@ class ApiConstants {
   static const String pendingOrders = "api/v1/orders/pending-orders";
   static const String editProfile = "api/v1/drivers/editProfile";
   static const String uploadPhoto = "api/v1/drivers/upload-photo";
+  static const String updateOrderDetails = "api/v1/orders/state";
+  static const String startOrder = "api/v1/orders/start";
 
 }

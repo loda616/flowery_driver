@@ -16,3 +16,20 @@ class EditeProfileRequestModel {
     return map;
   }
 }
+class UpdateVehicleRequestModel {
+  final String? vehicleType;
+  final String? vehicleNumber;
+  final String? vehicleLicense;
+
+  UpdateVehicleRequestModel({
+    this.vehicleType,
+    this.vehicleNumber,
+    this.vehicleLicense,
+  });
+
+  Map<String, dynamic> toJson() => {
+    'vehicleType': vehicleType,
+    'vehicleNumber': vehicleNumber,
+    'vehicleLicense': vehicleLicense,
+  };
+}

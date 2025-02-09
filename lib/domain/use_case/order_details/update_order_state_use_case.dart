@@ -1,4 +1,7 @@
+import 'package:flowery_driver/core/api/api_result.dart';
+import 'package:flowery_driver/domain/entity/order_details/update_order_entity.dart';
 import 'package:injectable/injectable.dart';
+import '../../../data/model/order/UpdateOrderDetailsRequestBody.dart';
 import '../../repository/order_details/order_details_repository.dart';
 
 @injectable
@@ -7,7 +10,8 @@ class UpdateOrderStateUseCase {
 
   UpdateOrderStateUseCase(this._repository);
 
-  Future<void> call(String orderId, String state) async {
-    await _repository.updateOrderState(orderId, state);
+  Future<Result<UpdateOrdersEntity?>> call(String orderId,UpdateOrderDetailsRequestBody state) async {
+   final result= await _repository.updateOrderState(orderId, state);
+   return result;
   }
 }

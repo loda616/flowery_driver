@@ -115,8 +115,7 @@ class _EditDriverInfoFormState extends State<EditDriverInfoForm> {
             CustomButton(
               onPressed: hasChanges
                   ? () async {
-                if (viewModel.formKey.currentState!.validate()) {
-                  await viewModel.editeProfile();
+                  viewModel.submitForm();
                   setState(() {
                     widget.driver.firstName =
                         viewModel.firstNameController.text;
@@ -128,7 +127,6 @@ class _EditDriverInfoFormState extends State<EditDriverInfoForm> {
                     hasChanges = false;
                   });
                 }
-              }
                   : null,
               text: "Update",
               textStyle: TextStyle(

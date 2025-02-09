@@ -8,9 +8,9 @@ class TokenInterceptor extends Interceptor {
 
   @override
   void onRequest(
-    RequestOptions options,
-    RequestInterceptorHandler handler,
-  ) async {
+      RequestOptions options,
+      RequestInterceptorHandler handler,
+      ) async {
     try {
       final token = await TokenManager.getToken();
 

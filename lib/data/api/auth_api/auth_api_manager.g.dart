@@ -59,17 +59,90 @@ class _AuthApiManager implements AuthApiManager {
   }
 
   @override
-  Future<SignUpResponseModel> apply(
-      ApplyRequestBodyModel signUpRequestBody) async {
+  Future<SignUpResponseModel> applyDriver(
+    String country,
+    String firstName,
+    String lastName,
+    String vehicleType,
+    String vehicleNumber,
+    File vehicleLicense,
+    String nID,
+    File nIDImg,
+    String email,
+    String password,
+    String rePassword,
+    String gender,
+    String phone,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(signUpRequestBody.toJson());
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'country',
+      country,
+    ));
+    _data.fields.add(MapEntry(
+      'firstName',
+      firstName,
+    ));
+    _data.fields.add(MapEntry(
+      'lastName',
+      lastName,
+    ));
+    _data.fields.add(MapEntry(
+      'vehicleType',
+      vehicleType,
+    ));
+    _data.fields.add(MapEntry(
+      'vehicleNumber',
+      vehicleNumber,
+    ));
+    _data.files.add(MapEntry(
+      'vehicleLicense',
+      MultipartFile.fromFileSync(
+        vehicleLicense.path,
+        filename: vehicleLicense.path.split(Platform.pathSeparator).last,
+        contentType: MediaType.parse('image/jpeg'),
+      ),
+    ));
+    _data.fields.add(MapEntry(
+      'NID',
+      nID,
+    ));
+    _data.files.add(MapEntry(
+      'NIDImg',
+      MultipartFile.fromFileSync(
+        nIDImg.path,
+        filename: nIDImg.path.split(Platform.pathSeparator).last,
+        contentType: MediaType.parse('image/jpeg'),
+      ),
+    ));
+    _data.fields.add(MapEntry(
+      'email',
+      email,
+    ));
+    _data.fields.add(MapEntry(
+      'password',
+      password,
+    ));
+    _data.fields.add(MapEntry(
+      'rePassword',
+      rePassword,
+    ));
+    _data.fields.add(MapEntry(
+      'gender',
+      gender,
+    ));
+    _data.fields.add(MapEntry(
+      'phone',
+      phone,
+    ));
     final _options = _setStreamType<SignUpResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: 'multipart/form-data',
     )
         .compose(
           _dio.options,

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flowery_driver/domain/entity/profile/vehicle_entity.dart';
 import 'package:flowery_driver/domain/entity/vehicles/vehicle_type_entity.dart';
 import 'package:flowery_driver/domain/use_case/profile/logout_use_case.dart';
@@ -8,14 +7,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import '../../../core/api/api_result.dart';
 import '../../../core/base/base_view_model.dart';
-import '../../../data/model/auth/requests/edite_profile_request_model.dart';
 import '../../../domain/entity/profile/driver_entity.dart';
 import '../../../domain/use_case/profile/edit_profile_use_case.dart';
 import '../../../domain/use_case/profile/get_logged_driver_info_use_case.dart';
 import '../../../domain/use_case/profile/get_vehicle_info_use_case.dart';
 import '../../../domain/use_case/profile/upload_photo_use_case.dart';
 import '../../../domain/use_case/vehicles/get_all_vehicles_use_case.dart';
-
 
 @injectable
 class ProfileCubit extends BaseViewModel<ProfileState> {
@@ -42,6 +39,7 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController vehicleNumberController = TextEditingController();
   TextEditingController vehicleTypeController = TextEditingController();
+  TextEditingController vehicleLicenseController = TextEditingController();
 
   String? gender;
   String? photo;
@@ -49,25 +47,50 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
   DriverEntity? driver;
   VehicleEntity? vehicle;
   List<VehicleType> vehicles = [];
+  List<VehicleEntity> vehicleEntity = [];
+  List<String> vehicleTypes = [];
 
-  @injectable
+  Map<String, String> vehicleMap = {};
   Future<void> getAllVehicles() async {
+    emit(GetVehiclesTypeLoading());
     final result = await _getAllVehiclesUseCase.invoke();
     switch (result) {
       case Success():
-        vehicles = result.data ?? [];
+        if (result.data != null) {
+          vehicles = result.data!;
+        }
         emit(GetVehiclesTypeSuccess());
       case Fail():
         emit(GetVehiclesTypesError(
           errorMessage: getErrorMassageFromException(result.exception),
         ));
     }
-
   }
 
-  Future<void> updateVehicleType(String vehicleTypeId) async {
+  Future<void> updateVehicleInfo(
+      String vehicleNumber, String vehicleLicense, String vehicleTypeId) async {
     emit(EditProfileLoadingState());
-    await getLoggedUserInfo();
+
+    Map<String, dynamic> vehicleData = {
+      'vehicleNumber': vehicleNumber,
+      'vehicleLicense': vehicleLicense,
+      'vehicleType': vehicleTypeId,
+    };
+
+    final result = await editeProfileUseCase.invoke(vehicleData);
+
+    switch (result) {
+      case Success<DriverEntity?>():
+        final updatedUser = result.data;
+        vehicleNumberController.text = updatedUser?.vehicleNumber ?? '';
+        vehicleLicenseController.text = updatedUser?.vehicleLicense ?? '';
+        vehicleId = updatedUser?.vehicleType;
+        emit(EditProfileSuccessState(driver: updatedUser));
+        await getLoggedUserInfo();
+      case Fail<DriverEntity?>():
+        emit(EditProfileErrorState(
+            errorMessage: getErrorMassageFromException(result.exception)));
+    }
   }
 
   Future<void> getLoggedUserInfo() async {
@@ -77,6 +100,7 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
       case Success():
         driver = driverResult.data;
         vehicleId = driver?.vehicleType;
+        await getAllVehicles();
         emit(GetLoggedDriverInfoSuccessState(driver: driver));
         vehicleNumberController.text = driver?.vehicleNumber ?? '';
         firstNameController.text = driver?.firstName ?? '';
@@ -98,8 +122,10 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
     switch (vehicleResult) {
       case Success():
         vehicle = vehicleResult.data;
-        emit(GetVehicleInfoSuccessState(vehicle: vehicle,));
-        vehicleTypeController.text = vehicle?.type??"" ;
+        emit(GetVehicleInfoSuccessState(
+          vehicle: vehicle,
+        ));
+      //  vehicleTypeController.text = vehicle?.type??"" ;
 
       case Fail():
         emit(
@@ -109,29 +135,41 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
         );
     }
   }
-  // Update profile
-  Future<void> editeProfile() async {
-    EditeProfileRequestModel editeProfile = EditeProfileRequestModel(
-      firstName: firstNameController.text,
-      lastName: lastNameController.text,
-      email: emailController.text,
-      phone: phoneController.text,
-    );
+
+  void submitForm() {
+    if (formKey.currentState!.validate()) {
+      Map<String, dynamic> profileData = {
+        'firstName': firstNameController.text.trim(),
+        'lastName': lastNameController.text.trim(),
+        'phone': phoneController.text.trim(),
+        'email': emailController.text.trim(),
+      };
+      editeProfile(profileData);
+    }
+  }
+
+  Future<void> editeProfile(Map<String, dynamic> profileData) async {
     emit(EditProfileLoadingState());
 
-    var result = await editeProfileUseCase.invoke(editeProfile);
+    var result = await editeProfileUseCase.invoke(profileData);
     switch (result) {
       case Success<DriverEntity?>():
         final updatedUser = result.data;
-        firstNameController.text = updatedUser?.firstName ?? '';
-        lastNameController.text = updatedUser?.lastName ?? '';
-        emailController.text = updatedUser?.email ?? '';
-        phoneController.text = updatedUser?.phone ?? '';
-        emit(EditProfileSuccessState(driver: updatedUser));
+        if (updatedUser != null) {
+          driver = updatedUser;
+          vehicleNumberController.text = updatedUser.vehicleNumber ?? '';
+          firstNameController.text = updatedUser.firstName ?? '';
+          lastNameController.text = updatedUser.lastName ?? '';
+          emailController.text = updatedUser.email ?? '';
+          phoneController.text = updatedUser.phone ?? '';
+        }
+        emit(EditProfileSuccessState(driver: driver));
         await getLoggedUserInfo();
+        break;
       case Fail<DriverEntity?>():
         emit(EditProfileErrorState(
             errorMessage: getErrorMassageFromException(result.exception)));
+        break;
     }
   }
 
@@ -148,7 +186,6 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
     }
   }
 
-
   Future<void> logout() async {
     final response = await _logoutUseCase.invoke();
     switch (response) {
@@ -161,6 +198,7 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
         ));
     }
   }
+
 // Profile form validation
   bool isFormField = true;
 
@@ -171,5 +209,11 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
   void changeFormField(bool isValid) {
     emit(ProfileInitialState());
     isFormField = isValid;
+  }
+
+  void updateDriverInfo(DriverEntity updatedDriver) {
+    driver = updatedDriver;
+    vehicleNumberController.text = updatedDriver.vehicleNumber ?? '';
+    emit(GetLoggedDriverInfoSuccessState(driver: driver));
   }
 }

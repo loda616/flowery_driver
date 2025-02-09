@@ -56,14 +56,14 @@ class _EditDriverInfoScreenState extends State<EditVehicleInfoScreen> {
           } else if (state is GetLoggedDriverInfoErrorState) {
             return _buildError(state.errorMessage ?? local.anErrorOccurred);
           } else if (state is GetLoggedDriverInfoSuccessState) {
+            final vehicleTypeName = viewModel.vehicleMap[viewModel.vehicleId] ?? "Unknown";
+
             return SingleChildScrollView(
               child: Column(
                 children: [
                   EditVehicleInfoForm(
                       driver: state.driver!,
-                      vehicle: state.driver?.vehicleType != null
-                          ? VehicleEntity(type: state.driver!.vehicleType!)
-                          : VehicleEntity()
+                    vehicle: context.read<ProfileCubit>().vehicles,
                   )
                 ],
               ),
