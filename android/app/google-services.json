@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "151063020623",
+    "project_id": "flowey-tracking",
+    "storage_bucket": "flowey-tracking.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151063020623:android:b3d35af6bef5bc1aa5963a",
+        "android_client_info": {
+          "package_name": "com.example.flowery_driver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXsYak_hSTcWyGoEWQ2MlglXnAn3fF-iI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
