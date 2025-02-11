@@ -1,3 +1,4 @@
+import 'package:flowery_driver/presentation/orders/view/orders_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/di/di.dart';
@@ -22,9 +23,7 @@ class _HomeLayoutScreenState extends State<HomeLayoutScreen> {
     super.initState();
     _screens = [
       PendingOrders(),
-      Scaffold(
-        body: Text('Home'),
-      ),
+      OrdersScreen(),
       BlocProvider(
         create: (context) => getIt<ProfileCubit>(),
         child: MyProfileScreen(
