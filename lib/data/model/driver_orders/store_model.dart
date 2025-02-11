@@ -2,7 +2,6 @@ import 'package:flowery_driver/domain/entity/drivers_order/store_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'store_model.g.dart';
-
 @JsonSerializable()
 class StoreModel {
   final String? name;
@@ -27,7 +26,7 @@ class StoreModel {
   StoreEntity toEntity() {
     return StoreEntity(
       name: name,
-      image: image,
+      image: image,  // Pass image to entity
       address: address,
       phoneNumber: phoneNumber,
       latLong: latLong,

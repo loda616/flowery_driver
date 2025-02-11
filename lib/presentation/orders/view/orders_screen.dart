@@ -110,7 +110,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
             final order = state.orders[index];
             if (order == null) return const SizedBox.shrink();
 
-            // Pass the individual order entity components
             return OrderCard(
               user: order.order?.user,
               store: order.store,

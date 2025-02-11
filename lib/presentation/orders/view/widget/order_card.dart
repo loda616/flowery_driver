@@ -1,6 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart' show CachedNetworkImage;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:injectable/injectable.dart' show order;
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../domain/entity/drivers_order/order_entity.dart' show OrderEntity;
@@ -15,6 +15,7 @@ class OrderCard extends StatelessWidget {
     required this.user,
     required this.store,
     required this.order,
+
   });
 
   final UserEntity? user;
@@ -154,7 +155,23 @@ class OrderCard extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(25),
-                  child: Image.asset(AppImages.personPhoto, width: 50, height: 50),
+                  child: store?.image != null && store!.image!.isNotEmpty
+                      ? CachedNetworkImage(
+                    imageUrl: store!.image!,
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.kPink,
+                      ),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        Image.asset(AppImages.personPhoto,
+                            width: 50, height: 50),
+                  )
+                      : Image.asset(AppImages.personPhoto,
+                      width: 50, height: 50),
                 ),
                 10.horizontalSpace,
                 Column(
@@ -197,7 +214,6 @@ class OrderCard extends StatelessWidget {
       ),
     );
   }
-
   Widget _buildUserCard() {
     return Container(
       height: 80.h,
