@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import '../../../core/api/api_const.dart';
-import '../../model/driver_orders/driver_orders_response_model.dart';  // Updated import
+import '../../model/driver_orders/driver_orders_response_model.dart';
 
 part 'driver_orders_api_manager.g.dart';
 

@@ -6,7 +6,8 @@ import 'package:json_annotation/json_annotation.dart';
 part 'order_detail_model.g.dart';
 
 @JsonSerializable()
-class OrderDetailModel {
+class OrderDetailsModel {
+  @JsonKey(name: '_id')
   final String? id;
   final UserModel? user;
   final List<OrderItemModel>? orderItems;
@@ -18,8 +19,10 @@ class OrderDetailModel {
   final String? createdAt;
   final String? updatedAt;
   final String? orderNumber;
+  @JsonKey(name: '__v')
+  final int? version;
 
-  OrderDetailModel({
+  OrderDetailsModel({
     this.id,
     this.user,
     this.orderItems,
@@ -31,15 +34,16 @@ class OrderDetailModel {
     this.createdAt,
     this.updatedAt,
     this.orderNumber,
+    this.version,
   });
 
-  factory OrderDetailModel.fromJson(Map<String, dynamic> json) =>
-      _$OrderDetailModelFromJson(json);
+  factory OrderDetailsModel.fromJson(Map<String, dynamic> json) =>
+      _$OrderDetailsModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$OrderDetailModelToJson(this);
+  Map<String, dynamic> toJson() => _$OrderDetailsModelToJson(this);
 
-  OrderDetailEntity toEntity() {
-    return OrderDetailEntity(
+  OrderDetailsEntity toEntity() {
+    return OrderDetailsEntity(
       id: id,
       user: user?.toEntity(),
       orderItems: orderItems?.map((e) => e.toEntity()).toList(),

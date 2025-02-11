@@ -5,11 +5,14 @@ import 'store_model.dart';
 
 part 'driver_order_model.g.dart';
 
+
+
 @JsonSerializable()
 class DriverOrderModel {
   final String? id;
   final String? driver;
-  final OrderDetailModel? order;
+  @JsonKey(name: 'order')  // Map 'order' from JSON to orderDetails
+  final OrderDetailsModel? orderDetails;
   final StoreModel? store;
   final String? createdAt;
   final String? updatedAt;
@@ -17,7 +20,7 @@ class DriverOrderModel {
   DriverOrderModel({
     this.id,
     this.driver,
-    this.order,
+    this.orderDetails,
     this.store,
     this.createdAt,
     this.updatedAt,
@@ -32,7 +35,7 @@ class DriverOrderModel {
     return OrderEntity(
       id: id,
       driver: driver,
-      order: order?.toEntity(),
+      order: orderDetails?.toEntity(),
       store: store?.toEntity(),
       createdAt: createdAt,
       updatedAt: updatedAt,

@@ -1,7 +1,7 @@
 import 'package:flowery_driver/domain/entity/drivers_order/order_item_entity.dart';
 import 'package:flowery_driver/domain/entity/drivers_order/user_entity.dart';
 
-class OrderDetailEntity {
+class OrderDetailsEntity {
   final String? id;
   final UserEntity? user;
   final List<OrderItemEntity>? orderItems;
@@ -14,7 +14,7 @@ class OrderDetailEntity {
   final String? updatedAt;
   final String? orderNumber;
 
-  OrderDetailEntity({
+  OrderDetailsEntity({
     this.id,
     this.user,
     this.orderItems,
