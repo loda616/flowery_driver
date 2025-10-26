@@ -1,12 +1,10 @@
 import 'package:injectable/injectable.dart';
-
 import '../../../core/api/api_result.dart';
 import '../../../core/local/secure_storage.dart';
 import '../../../core/local/token_manger.dart';
 import '../../../domain/entity/auth/applu.dart';
 import '../../../domain/repository/auth/auth_repository.dart';
 import '../../data_source/remote_data_source/auth/auth_remote_data_source.dart';
-import '../../model/auth/requests/apply_request_model.dart';
 import '../../model/auth/requests/login_request_model.dart';
 import '../../model/auth/requests/reset_password_request_model.dart';
 

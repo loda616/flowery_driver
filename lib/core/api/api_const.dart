@@ -14,5 +14,5 @@ class ApiConstants {
   static const String uploadPhoto = "api/v1/drivers/upload-photo";
   static const String updateOrderDetails = "api/v1/orders/state";
   static const String startOrder = "api/v1/orders/start";
-
+  static const String getAllDriverOrders = "api/v1/orders/driver-orders";
 }

@@ -6,14 +6,10 @@ part of 'auth_api_manager.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter
 
 class _AuthApiManager implements AuthApiManager {
-  _AuthApiManager(
-    this._dio, {
-    this.baseUrl,
-    this.errorLogger,
-  }) {
+  _AuthApiManager(this._dio, {this.baseUrl, this.errorLogger}) {
     baseUrl ??= 'https://flower.elevateegy.com/';
   }
 
@@ -25,28 +21,23 @@ class _AuthApiManager implements AuthApiManager {
 
   @override
   Future<LoginResponseModel> logIn(
-      LoginRequestBodyModel loginRequestBody) async {
+    LoginRequestBodyModel loginRequestBody,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(loginRequestBody.toJson());
-    final _options = _setStreamType<LoginResponseModel>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          'api/v1/drivers/signin',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
+    final _options = _setStreamType<LoginResponseModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'api/v1/drivers/signin',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late LoginResponseModel _value;
     try {
@@ -78,83 +69,52 @@ class _AuthApiManager implements AuthApiManager {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = FormData();
-    _data.fields.add(MapEntry(
-      'country',
-      country,
-    ));
-    _data.fields.add(MapEntry(
-      'firstName',
-      firstName,
-    ));
-    _data.fields.add(MapEntry(
-      'lastName',
-      lastName,
-    ));
-    _data.fields.add(MapEntry(
-      'vehicleType',
-      vehicleType,
-    ));
-    _data.fields.add(MapEntry(
-      'vehicleNumber',
-      vehicleNumber,
-    ));
-    _data.files.add(MapEntry(
-      'vehicleLicense',
-      MultipartFile.fromFileSync(
-        vehicleLicense.path,
-        filename: vehicleLicense.path.split(Platform.pathSeparator).last,
-        contentType: MediaType.parse('image/jpeg'),
+    _data.fields.add(MapEntry('country', country));
+    _data.fields.add(MapEntry('firstName', firstName));
+    _data.fields.add(MapEntry('lastName', lastName));
+    _data.fields.add(MapEntry('vehicleType', vehicleType));
+    _data.fields.add(MapEntry('vehicleNumber', vehicleNumber));
+    _data.files.add(
+      MapEntry(
+        'vehicleLicense',
+        MultipartFile.fromFileSync(
+          vehicleLicense.path,
+          filename: vehicleLicense.path.split(Platform.pathSeparator).last,
+          contentType: DioMediaType.parse('image/jpeg'),
+        ),
       ),
-    ));
-    _data.fields.add(MapEntry(
-      'NID',
-      nID,
-    ));
-    _data.files.add(MapEntry(
-      'NIDImg',
-      MultipartFile.fromFileSync(
-        nIDImg.path,
-        filename: nIDImg.path.split(Platform.pathSeparator).last,
-        contentType: MediaType.parse('image/jpeg'),
+    );
+    _data.fields.add(MapEntry('NID', nID));
+    _data.files.add(
+      MapEntry(
+        'NIDImg',
+        MultipartFile.fromFileSync(
+          nIDImg.path,
+          filename: nIDImg.path.split(Platform.pathSeparator).last,
+          contentType: DioMediaType.parse('image/jpeg'),
+        ),
       ),
-    ));
-    _data.fields.add(MapEntry(
-      'email',
-      email,
-    ));
-    _data.fields.add(MapEntry(
-      'password',
-      password,
-    ));
-    _data.fields.add(MapEntry(
-      'rePassword',
-      rePassword,
-    ));
-    _data.fields.add(MapEntry(
-      'gender',
-      gender,
-    ));
-    _data.fields.add(MapEntry(
-      'phone',
-      phone,
-    ));
-    final _options = _setStreamType<SignUpResponseModel>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-      contentType: 'multipart/form-data',
-    )
-        .compose(
-          _dio.options,
-          'api/v1/drivers/apply',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
+    );
+    _data.fields.add(MapEntry('email', email));
+    _data.fields.add(MapEntry('password', password));
+    _data.fields.add(MapEntry('rePassword', rePassword));
+    _data.fields.add(MapEntry('gender', gender));
+    _data.fields.add(MapEntry('phone', phone));
+    final _options = _setStreamType<SignUpResponseModel>(
+      Options(
+        method: 'POST',
+        headers: _headers,
+        extra: _extra,
+        contentType: 'multipart/form-data',
+      )
+          .compose(
+            _dio.options,
+            'api/v1/drivers/apply',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late SignUpResponseModel _value;
     try {
@@ -173,22 +133,16 @@ class _AuthApiManager implements AuthApiManager {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(email);
-    final _options = _setStreamType<String>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          'api/v1/drivers/forgotPassword',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
+    final _options = _setStreamType<String>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'api/v1/drivers/forgotPassword',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<String>(_options);
     late String? _value;
     try {
@@ -207,22 +161,16 @@ class _AuthApiManager implements AuthApiManager {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(resetCode);
-    final _options = _setStreamType<String>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          'api/v1/drivers/verifyResetCode',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
+    final _options = _setStreamType<String>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'api/v1/drivers/verifyResetCode',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<String>(_options);
     late String? _value;
     try {
@@ -241,22 +189,16 @@ class _AuthApiManager implements AuthApiManager {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(resetPassword.toJson());
-    final _options = _setStreamType<String>(Options(
-      method: 'PUT',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          'api/v1/drivers/resetPassword',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
+    final _options = _setStreamType<String>(
+      Options(method: 'PUT', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'api/v1/drivers/resetPassword',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<String>(_options);
     late String? _value;
     try {
@@ -281,10 +223,7 @@ class _AuthApiManager implements AuthApiManager {
     return requestOptions;
   }
 
-  String _combineBaseUrls(
-    String dioBaseUrl,
-    String? baseUrl,
-  ) {
+  String _combineBaseUrls(String dioBaseUrl, String? baseUrl) {
     if (baseUrl == null || baseUrl.trim().isEmpty) {
       return dioBaseUrl;
     }
